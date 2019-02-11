@@ -1,0 +1,21 @@
+server:
+  port: 38763
+
+spring:
+  batch:
+    job:
+      enabled: false
+  jpa:
+    properties:
+      hibernate:
+        show_sql: false
+        format_sql: false
+        use_sql_comments: true
+        jdbc:
+          batch_size: 5
+          lob:
+            non_contextual_creation: true
+  datasource:
+    url: jdbc:postgresql://localhost:5432/chessfactory?user=chessfactory&password=chessfactory
+    hikari:
+      maximum-pool-size: 4

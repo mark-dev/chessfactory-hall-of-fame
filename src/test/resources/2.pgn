@@ -1,0 +1,20 @@
+[Event "Rated Rapid game"]
+[Site "https://lichess.org/C6Sk7LLm"]
+[Date "2014.05.25"]
+[Round "-"]
+[White "ltl"]
+[Black "gensrv"]
+[Result "1-0"]
+[UTCDate "2014.05.25"]
+[UTCTime "10:15:30"]
+[WhiteElo "1685"]
+[BlackElo "1776"]
+[WhiteRatingDiff "+14"]
+[BlackRatingDiff "-14"]
+[Variant "Standard"]
+[TimeControl "600+8"]
+[ECO "A40"]
+[Termination "Normal"]
+
+1. d4 e6 2. Nf3 f5 3.
+Bg5 Nf6 4. e3 d5 5. c4 c6 6. c5 b6 7. cxb6 axb6 8. a3 c5 9. Bb5+ Bd7 10. Bxd7+ Qxd7 11. Ne5 Qb5 12. Bxf6 gxf6 13. Qh5+ Ke7 14. Qf7+ Kd6 15. Nf3 Qxb2 16. O-O Qxa1 17. Qxf6 Rg8 18. dxc5+ bxc5 19. Qxa1 1-0
