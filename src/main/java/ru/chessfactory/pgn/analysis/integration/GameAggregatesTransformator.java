@@ -1,34 +1,22 @@
-package ru.chessfactory.pgn.analysis.batch;
+package ru.chessfactory.pgn.analysis.integration;
 
 import chesspresso.game.Game;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.batch.item.ItemProcessor;
+import org.springframework.integration.transformer.AbstractPayloadTransformer;
 import ru.chessfactory.pgn.analysis.calc.IMoveHandler;
 import ru.chessfactory.pgn.analysis.calc.handlers.GameStatHandler;
 import ru.chessfactory.pgn.analysis.calc.handlers.PieceStatisticsHandler;
 import ru.chessfactory.pgn.analysis.jpa.entity.GameAggregates;
-import ru.chessfactory.pgn.analysis.read.PGNTokenEscapeReader;
 import ru.chessfactory.pgn.analysis.util.PGNPlayback;
 
-import java.io.ByteArrayInputStream;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 @Slf4j
-public class PGNItemProcessor implements ItemProcessor<ByteArrayInputStream, GameAggregates> {
+public class GameAggregatesTransformator extends AbstractPayloadTransformer<Game, GameAggregates> {
 
-    @Override
-    public GameAggregates process(ByteArrayInputStream item) throws Exception {
-
-        Game game = new PGNTokenEscapeReader(item, "").parseGame();
-        //Такое может быть, если нет ходов например просто написанно 1-0 в теле PGN
-        if (game != null) {
-            return handleGame(game);
-        }
-        return null;
-    }
 
     private GameAggregates handleGame(Game game) {
         List<IMoveHandler> handlers = Arrays.asList(new PieceStatisticsHandler(), new GameStatHandler());
@@ -51,5 +39,10 @@ public class PGNItemProcessor implements ItemProcessor<ByteArrayInputStream, Gam
         ga.setWhiteElo(whiteElo);
 
         return ga;
+    }
+
+    @Override
+    protected GameAggregates transformPayload(Game item) throws Exception {
+        return handleGame(item);
     }
 }
