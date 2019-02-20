@@ -9,7 +9,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @Slf4j
 public class Main implements CommandLineRunner {
 
-
     public static void main(String[] args) {
         SpringApplication.run(Main.class);
     }

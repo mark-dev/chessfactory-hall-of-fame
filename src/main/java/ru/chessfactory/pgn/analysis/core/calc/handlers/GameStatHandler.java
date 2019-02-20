@@ -1,14 +1,14 @@
-package ru.chessfactory.pgn.analysis.calc.handlers;
+package ru.chessfactory.pgn.analysis.core.calc.handlers;
 
 import chesspresso.move.Move;
 import chesspresso.position.Position;
-import ru.chessfactory.pgn.analysis.calc.IMoveHandler;
+import ru.chessfactory.pgn.analysis.core.calc.IMoveHandler;
 
 import java.util.HashMap;
 import java.util.Map;
 
 import static chesspresso.Chess.*;
-import static ru.chessfactory.pgn.analysis.calc.Utils.moveDistance;
+import static ru.chessfactory.pgn.analysis.core.calc.Utils.moveDistance;
 
 public class GameStatHandler implements IMoveHandler {
     private int moves = 0;

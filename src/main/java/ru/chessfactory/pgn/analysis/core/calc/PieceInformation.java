@@ -1,4 +1,4 @@
-package ru.chessfactory.pgn.analysis.calc;
+package ru.chessfactory.pgn.analysis.core.calc;
 
 import chesspresso.Chess;
 import lombok.AllArgsConstructor;

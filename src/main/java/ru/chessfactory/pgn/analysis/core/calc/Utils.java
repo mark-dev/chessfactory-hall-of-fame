@@ -1,4 +1,4 @@
-package ru.chessfactory.pgn.analysis.calc;
+package ru.chessfactory.pgn.analysis.core.calc;
 
 import chesspresso.move.Move;
 
@@ -9,7 +9,6 @@ import static java.lang.Math.sqrt;
 
 public class Utils {
     public static double moveDistance(Move m) {
-        double moveDistance = sqrt(pow(deltaCol(m.getFromSqi(), m.getToSqi()), 2) + pow(deltaRow(m.getFromSqi(), m.getToSqi()), 2));
-        return moveDistance;
+        return sqrt(pow(deltaCol(m.getFromSqi(), m.getToSqi()), 2) + pow(deltaRow(m.getFromSqi(), m.getToSqi()), 2));
     }
 }

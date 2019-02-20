@@ -1,8 +1,8 @@
-package ru.chessfactory.pgn.analysis.util;
+package ru.chessfactory.pgn.analysis.core.util;
 
 import chesspresso.game.Game;
 import lombok.extern.slf4j.Slf4j;
-import ru.chessfactory.pgn.analysis.calc.IMoveHandler;
+import ru.chessfactory.pgn.analysis.core.calc.IMoveHandler;
 
 import java.util.Collection;
 import java.util.HashMap;

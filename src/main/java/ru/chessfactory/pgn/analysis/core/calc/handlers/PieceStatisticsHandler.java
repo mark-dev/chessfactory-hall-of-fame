@@ -1,11 +1,11 @@
-package ru.chessfactory.pgn.analysis.calc.handlers;
+package ru.chessfactory.pgn.analysis.core.calc.handlers;
 
 import chesspresso.Chess;
 import chesspresso.move.Move;
 import chesspresso.position.Position;
 import lombok.extern.slf4j.Slf4j;
-import ru.chessfactory.pgn.analysis.calc.IMoveHandler;
-import ru.chessfactory.pgn.analysis.calc.PieceInformation;
+import ru.chessfactory.pgn.analysis.core.calc.IMoveHandler;
+import ru.chessfactory.pgn.analysis.core.calc.PieceInformation;
 
 import java.util.ArrayList;
 import java.util.HashMap;

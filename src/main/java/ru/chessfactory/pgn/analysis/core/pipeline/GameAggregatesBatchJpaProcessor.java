@@ -1,4 +1,4 @@
-package ru.chessfactory.pgn.analysis.integration;
+package ru.chessfactory.pgn.analysis.core.pipeline;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,14 +11,15 @@ import ru.chessfactory.pgn.analysis.jpa.repo.GameAggregateRepository;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
 
 @Slf4j
-public class DBSaver implements GenericHandler<Collection<Message<GameAggregates>>> {
+public class GameAggregatesBatchJpaProcessor implements GenericHandler<Collection<Message<GameAggregates>>> {
     @Autowired
     private GameAggregateRepository repository;
 
-    private int saved = 0;
+    private AtomicInteger saved = new AtomicInteger();
 
     @Override
     public Object handle(Collection<Message<GameAggregates>> payload, MessageHeaders headers) {
@@ -30,9 +31,9 @@ public class DBSaver implements GenericHandler<Collection<Message<GameAggregates
 
         sw.start();
         repository.saveAll(aggs);
-        saved += aggs.size();
+        int totalSaved = saved.addAndGet(aggs.size());
         sw.stop();
-        log.info("Game aggregates batch saved, takes: {}. Total saved = {}", sw.getLastTaskTimeMillis(), saved);
+        log.info("Game aggregates batch saved, takes: {}. Total saved = {}", sw.getLastTaskTimeMillis(), totalSaved);
         return null;
     }
 }

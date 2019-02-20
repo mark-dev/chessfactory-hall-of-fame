@@ -1,40 +1,48 @@
-package ru.chessfactory.pgn.analysis.integration;
+package ru.chessfactory.pgn.analysis.core.util;
 
+import lombok.SneakyThrows;
 import org.apache.commons.compress.compressors.bzip2.BZip2CompressorInputStream;
-import org.springframework.integration.endpoint.AbstractMessageSource;
 import org.springframework.messaging.MessagingException;
 
 import java.io.*;
 import java.util.Scanner;
 
-public class PGNMessageSource extends AbstractMessageSource<ByteArrayInputStream> {
-    private Scanner sc;
-    private int readedGames;
+public class BasePGNProducer {
+    protected Scanner sc;
+    protected int readedGames;
 
-    private Long readLimit;
-    private String fileName;
+    protected Long readLimit;
 
-    public PGNMessageSource(String fileName, Long readLimit) {
-        this.fileName = fileName;
-        this.readLimit = readLimit;
-        try {
-            File database = new File(fileName);
-            InputStream res = new BZip2CompressorInputStream(new FileInputStream(database));
-            sc = new Scanner(res, "utf-8").useDelimiter("\n");
-        } catch (IOException ex) {
-            throw new RuntimeException("io while opening file", ex);
-        }
 
+    public static BasePGNProducer of(InputStream is, Long readLimit) {
+        return new BasePGNProducer(is, readLimit);
     }
 
-    @Override
-    protected Object doReceive() {
-        try {
-            if (readLimit > 0 && readedGames >= readLimit) return null;
+    @SneakyThrows
+    public static BasePGNProducer of(String fileName, Long readLimit) {
+        File database = new File(fileName);
+        return new BasePGNProducer(new FileInputStream(database), readLimit);
+    }
 
-            //Try read game
+    @SneakyThrows
+    private BasePGNProducer(InputStream is, Long readLimit) {
+        this.readLimit = readLimit;
+
+        InputStream res = new BZip2CompressorInputStream(is);
+        sc = new Scanner(res, "utf-8").useDelimiter("\n");
+    }
+
+    private boolean limitNotReached() {
+        if (readLimit < 0)
+            return true;
+        else
+            return readedGames <= readLimit;
+    }
+
+    public ByteArrayInputStream readNextGame() {
+        try {
             ByteArrayOutputStream baos = null;
-            while (sc.hasNext()) {
+            while (limitNotReached() && sc.hasNext()) {
                 if (baos == null) {
                     baos = new ByteArrayOutputStream();
                 }
@@ -63,8 +71,4 @@ public class PGNMessageSource extends AbstractMessageSource<ByteArrayInputStream
         }
     }
 
-    @Override
-    public String getComponentType() {
-        return "inbound-channel-adapter";
-    }
 }
