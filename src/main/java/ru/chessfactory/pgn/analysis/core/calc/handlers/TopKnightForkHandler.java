@@ -12,7 +12,6 @@ import java.util.Map;
 
 import static chesspresso.move.Move.getFromSqi;
 import static chesspresso.move.Move.getToSqi;
-import static java.lang.Math.abs;
 
 @Slf4j
 public class TopKnightForkHandler implements IMoveHandler {
@@ -29,7 +28,7 @@ public class TopKnightForkHandler implements IMoveHandler {
             //For position attack evaluate, based on new position occurs after this move. undo later
             p.doMove(m);
 
-            int forkSize = 0;
+            int thisForkSize = 0;
             int thisForkMaterialAmount = 0;
 
             int knightMoveToSQI = m.getToSqi();
@@ -49,11 +48,11 @@ public class TopKnightForkHandler implements IMoveHandler {
                     int targetPieceMaterial = pieceToMaterial(targetPiece);
                     if (targetPieceMaterial > KNIGHT_MATERIAL_AMOUNT || targetPiece == Chess.KING) {
                         thisForkMaterialAmount += targetPieceMaterial;
-                        forkSize++;
+                        thisForkSize++;
                     }
                 }
             }
-            if (forkSize > 1) {
+            if (thisForkSize > 1) {
                 boolean knightCantBeCapturedWithoutLoosingMaterial = true;
                 //Check opposite side moves
                 //If knight can be taken without material loosing - this situation are treated as no fork.
@@ -61,21 +60,21 @@ public class TopKnightForkHandler implements IMoveHandler {
                     int captureTarget = getToSqi(cp);
                     int movingPiece = p.getPiece(getFromSqi(cp));
                     //Bishop takes is OK, that's why abs delta here
-                    boolean materialLoseAfterCapture = knightABSMaterialCompare(pieceToMaterial(movingPiece), 100);
-                    if (captureTarget == knightMoveToSQI && !materialLoseAfterCapture) {
+                    boolean withoutMaterialLose = pieceToMaterial(movingPiece) <= pieceToMaterial(Chess.BISHOP);
+                    if (captureTarget == knightMoveToSQI && withoutMaterialLose) {
                         knightCantBeCapturedWithoutLoosingMaterial = false;
                         break;
                     }
                 }
 
                 if (knightCantBeCapturedWithoutLoosingMaterial) {
-                    maxForkSize = Integer.max(maxForkSize, forkSize);
+                    maxForkSize = Integer.max(maxForkSize, thisForkSize);
                     maxForkMaterialAmount = Integer.max(maxForkMaterialAmount, thisForkMaterialAmount);
                     if (maxForkMaterialAmount != 0 && maxForkMaterialAmount == thisForkMaterialAmount) {
                         maxForkMove = p.getPlyNumber() / 2;
                     }
                     log.debug("Knight move to {} is fork to {} pieces, material = {}. MoveNumber = {}",
-                            Chess.sqiToStr(knightMoveToSQI), forkSize, thisForkMaterialAmount, (p.getPlyNumber()) / 2);
+                            Chess.sqiToStr(knightMoveToSQI), thisForkSize, thisForkMaterialAmount, (p.getPlyNumber()) / 2);
                 }
             }
 
@@ -84,9 +83,6 @@ public class TopKnightForkHandler implements IMoveHandler {
 
     }
 
-    private boolean knightABSMaterialCompare(int pieceMaterial, int delta) {
-        return abs(pieceMaterial - KNIGHT_MATERIAL_AMOUNT) > delta;
-    }
 
     private static int pieceToMaterial(int piece) {
         switch (piece) {

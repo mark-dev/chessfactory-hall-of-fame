@@ -3,10 +3,10 @@ server:
 
 chessfactory:
   file: /media/mark/DATAPART1/lichess_db_standard_rated_2018-12.pgn.bz2
-  readlimit: 50000
+  readlimit: -1
   max-pgn-in-flight: 100000
   db-writer:
-    batch-size: 200
+    batch-size: 1000
     pool:
       corePoolSize: 8
       threadNamePrefix: db-writer-thread
