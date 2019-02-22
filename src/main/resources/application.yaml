@@ -3,7 +3,7 @@ server:
 
 chessfactory:
   file: /media/mark/DATAPART1/lichess_db_standard_rated_2018-12.pgn.bz2
-  readlimit: -1
+  readlimit: 50000
   max-pgn-in-flight: 100000
   db-writer:
     batch-size: 200

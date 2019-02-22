@@ -21,7 +21,7 @@ public class SimpleTestExample {
     @Test
     @SneakyThrows
     public void calcAggregates() {
-        InputStream pgn = this.getClass().getClassLoader().getResourceAsStream("3.pgn");
+        InputStream pgn = this.getClass().getClassLoader().getResourceAsStream("1.pgn");
 
         Game game = new PGNReader(pgn,"").parseGame();
 

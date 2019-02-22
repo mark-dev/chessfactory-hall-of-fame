@@ -3,6 +3,7 @@ package ru.chessfactory.pgn.analysis.core.calc;
 import chesspresso.move.Move;
 import chesspresso.position.Position;
 
+import java.util.Collections;
 import java.util.Map;
 
 public interface IMoveHandler {
@@ -12,5 +13,7 @@ public interface IMoveHandler {
      */
     void handleMove(Position p, Move m);
 
-    Map<String,Object> result();
+    default Map<String, Object> result() {
+        return Collections.emptyMap();
+    }
 }
