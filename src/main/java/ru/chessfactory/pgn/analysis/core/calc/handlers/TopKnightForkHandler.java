@@ -5,27 +5,31 @@ import chesspresso.move.Move;
 import chesspresso.position.Position;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
+import ru.chessfactory.pgn.analysis.core.calc.AggregateResultField;
 import ru.chessfactory.pgn.analysis.core.calc.IMoveHandler;
-
-import java.util.HashMap;
-import java.util.Map;
-
-import static chesspresso.move.Move.getFromSqi;
-import static chesspresso.move.Move.getToSqi;
 
 @Slf4j
 public class TopKnightForkHandler implements IMoveHandler {
+    @AggregateResultField
     private int maxForkSize = 0;
+    @AggregateResultField
     private int maxForkMaterialAmount = 0;
-    private int maxForkMove = 0;
+    @AggregateResultField
+    private int maxForkPly = 0;
+    @AggregateResultField
+    private int maxForkMaterialAmountPly = 0;
 
-    private static final int KNIGHT_MATERIAL_AMOUNT = pieceToMaterial(Chess.KNIGHT);
+    //TODO: store set<int> - forked pieces, for example we can search forks where few queen are forked
 
     @Override
     @SneakyThrows
     public void handleMove(Position p, Move m) {
+        //TODO: we can drop forks, where knight can be simply recaptured by enemy piece with less or equal material value.
+        //TODO: BUT. Maybe this is combination? We need chess-engine to check it.
+
         if (m.getMovingPiece() == Chess.KNIGHT) {
-            //For position attack evaluate, based on new position occurs after this move. undo later
+            //perform Move, for position attack evaluate, based on new position occurs after this move.
+            //Undo later
             p.doMove(m);
 
             int thisForkSize = 0;
@@ -34,50 +38,39 @@ public class TopKnightForkHandler implements IMoveHandler {
             int knightMoveToSQI = m.getToSqi();
 
 
-            //find All squares, that can be attack from this SQI
+            //find All squares, that can be attack from knightMoveToSQI
             for (int sqi = 0; sqi < Chess.NUM_OF_SQUARES; sqi++) {
 
                 int targetPiece = p.getPiece(sqi);
                 int pieceColor = p.getColor(sqi);
-                boolean targetPieceIsEnemy = targetPiece != Chess.NO_PIECE && pieceColor == p.getToPlay();
-                boolean knighAttackSquare = p.attacks(knightMoveToSQI, sqi);
+                boolean isTargetPieceEnemy = targetPiece != Chess.NO_PIECE && pieceColor == p.getToPlay();
+                boolean isKnightAttackSquare = p.attacks(knightMoveToSQI, sqi);
 
+                boolean sqiForkCandidate = isKnightAttackSquare && isTargetPieceEnemy;
 
-                if (knighAttackSquare && targetPieceIsEnemy) {
-                    //TODO: if pawn is unprotected, we should also include it here
+                if (sqiForkCandidate) {
                     int targetPieceMaterial = pieceToMaterial(targetPiece);
-                    if (targetPieceMaterial > KNIGHT_MATERIAL_AMOUNT || targetPiece == Chess.KING) {
-                        thisForkMaterialAmount += targetPieceMaterial;
-                        thisForkSize++;
-                    }
+                    thisForkMaterialAmount += targetPieceMaterial;
+                    thisForkSize++;
                 }
             }
-            if (thisForkSize > 1) {
-                boolean knightCantBeCapturedWithoutLoosingMaterial = true;
-                //Check opposite side moves
-                //If knight can be taken without material loosing - this situation are treated as no fork.
-                for (short cp : p.getAllCapturingMoves()) {
-                    int captureTarget = getToSqi(cp);
-                    int movingPiece = p.getPiece(getFromSqi(cp));
-                    //Bishop takes is OK, that's why abs delta here
-                    boolean withoutMaterialLose = pieceToMaterial(movingPiece) <= pieceToMaterial(Chess.BISHOP);
-                    if (captureTarget == knightMoveToSQI && withoutMaterialLose) {
-                        knightCantBeCapturedWithoutLoosingMaterial = false;
-                        break;
-                    }
-                }
+            boolean hasForks = thisForkSize > 1;
+            if (hasForks) {
+                int thisMovePly = p.getPlyNumber();
+                log.debug("Knight move to {} is fork to {} pieces, material = {}. MoveNumber = {}",
+                        Chess.sqiToStr(knightMoveToSQI), thisForkSize, thisForkMaterialAmount, thisMovePly);
 
-                if (knightCantBeCapturedWithoutLoosingMaterial) {
-                    maxForkSize = Integer.max(maxForkSize, thisForkSize);
-                    maxForkMaterialAmount = Integer.max(maxForkMaterialAmount, thisForkMaterialAmount);
-                    if (maxForkMaterialAmount != 0 && maxForkMaterialAmount == thisForkMaterialAmount) {
-                        maxForkMove = p.getPlyNumber() / 2;
-                    }
-                    log.debug("Knight move to {} is fork to {} pieces, material = {}. MoveNumber = {}",
-                            Chess.sqiToStr(knightMoveToSQI), thisForkSize, thisForkMaterialAmount, (p.getPlyNumber()) / 2);
+                //Assert new max values(if necessary)
+                if (thisForkSize > maxForkSize) {
+                    maxForkSize = thisForkSize;
+                    maxForkPly = thisMovePly;
+                }
+                if (thisForkMaterialAmount > maxForkMaterialAmount) {
+                    maxForkMaterialAmount = thisForkMaterialAmount;
+                    maxForkMaterialAmountPly = thisMovePly;
                 }
             }
-
+            //Other handlers do not interesting in our internal-need position changes.
             p.undoMove();
         }
 
@@ -94,19 +87,11 @@ public class TopKnightForkHandler implements IMoveHandler {
                 return 325;
             case Chess.ROOK:
                 return 500;
+            case Chess.KING: //King is important piece for fork calculations.
             case Chess.QUEEN:
                 return 900;
             default:
                 return 0;
         }
-    }
-
-    @Override
-    public Map<String, Object> result() {
-        Map<String, Object> res = new HashMap<>(3);
-        res.put("maxForkSize", maxForkSize);
-        res.put("maxForkMaterialAmount", maxForkMaterialAmount);
-        res.put("maxForkMove", maxForkMove);
-        return res;
     }
 }

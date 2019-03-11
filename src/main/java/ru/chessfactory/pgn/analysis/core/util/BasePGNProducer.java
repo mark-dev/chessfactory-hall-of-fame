@@ -7,7 +7,7 @@ import org.springframework.messaging.MessagingException;
 import java.io.*;
 import java.util.Scanner;
 
-public class BasePGNProducer {
+public class BasePGNProducer implements Closeable {
     protected Scanner sc;
     protected int readedGames;
 
@@ -16,6 +16,11 @@ public class BasePGNProducer {
 
     public static BasePGNProducer of(InputStream is, Long readLimit) {
         return new BasePGNProducer(is, readLimit);
+    }
+
+    @SneakyThrows
+    public static BasePGNProducer of(File f, Long readLimit) {
+        return new BasePGNProducer(new FileInputStream(f), readLimit);
     }
 
     @SneakyThrows
@@ -65,10 +70,15 @@ public class BasePGNProducer {
                     }
                 }
             }
+            sc.close();
             return null;
         } catch (IOException ex) {
             throw new MessagingException("Failed to read file", ex);
         }
     }
 
+    @Override
+    public void close() throws IOException {
+        sc.close();
+    }
 }

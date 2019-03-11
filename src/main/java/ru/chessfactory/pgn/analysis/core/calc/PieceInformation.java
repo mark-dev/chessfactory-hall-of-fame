@@ -5,6 +5,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.Set;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -13,6 +15,8 @@ public class PieceInformation {
     private int moveCount;
     private int piece;
     private int frags;
+    private Set<Integer> visitedSqi;
+    private boolean keepKnightTravel;
 
     @Override
     public String toString() {

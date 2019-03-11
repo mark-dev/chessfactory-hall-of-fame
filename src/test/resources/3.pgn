@@ -19,26 +19,6 @@
 1. e4 { [%clk 0:02:00] } d6 { [%clk 0:02:00] } 2. d4 { [%clk 0:01:59] } Nd7 { [%clk 0:02:00] } 3. e5 { [%clk 0:02:00] } d5 { [%clk 0:02:00] } 4. c4 { [%clk 0:01:57] } dxc4 { [%clk 0:01:59] } 5. Bxc4 { [%clk 0:01:57] } e6 { [%clk 0:01:59] } 6. Nf3 { [%clk 0:01:56] } Nb6 { [%clk 0:01:58] } 7. Bb3 { [%clk 0:01:55] } Ne7 { [%clk 0:01:51] } 8. O-O { [%clk 0:01:55] } Nf5 { [%clk 0:01:49] } 9. Bg5 { [%clk 0:01:53] } Qd7 { [%clk 0:01:45] } 10. Nc3 { [%clk 0:01:49] } h6 { [%clk 0:01:44] } 11. Bc1 { [%clk 0:01:46] } Be7 { [%clk 0:01:42] } 12. a3 { [%clk 0:01:46] } c6 { [%clk 0:01:41] } 13. Qe1 { [%clk 0:01:45] } Qc7 { [%clk 0:01:41] } 14. Nd2 { [%clk 0:01:44] } Bd7 { [%clk 0:01:40] } 15. f4 { [%clk 0:01:44] } Nd5 { [%clk 0:01:33] } 16. Nf3 { [%clk 0:01:37] } O-O-O { [%clk 0:01:27] } 17. Bd2 { [%clk 0:01:27] } Rdg8 { [%clk 0:01:21] } 18. Bc2 { [%clk 0:01:27] } g5 { [%clk 0:01:13] } 19. fxg5 { [%clk 0:01:23] } hxg5 { [%clk 0:01:11] } 20. Qe2 { [%clk 0:01:16] } Rh7 { [%clk 0:00:57] } 21. b4 { [%clk 0:01:14] } Rgh8 { [%clk 0:00:56] } 22. h3 { [%clk 0:01:04] } f6 { [%clk 0:00:37] } 23. Rf2 { [%clk 0:01:01] } fxe5 { [%clk 0:00:37] } 24. dxe5 { [%clk 0:01:00] } Nxc3 { [%clk 0:00:30] } 25. Bxc3 { [%clk 0:00:56] } Nh4 { [%clk 0:00:26] } 26. Nxh4 { [%clk 0:00:53] } gxh4 { [%clk 0:00:21] } 27. a4 { [%clk 0:00:49] } Rg7 { [%clk 0:00:15] } 28. Be1 { [%clk 0:00:48] } Rhg8 { [%clk 0:00:14] } 29. Bd3 { [%clk 0:00:46] } Qb6 { [%clk 0:00:13] } 30. a5 { [%clk 0:00:41] } Qc7 { [%clk 0:00:10] } 31. b5 { [%clk 0:00:40] } Kb8 { [%clk 0:00:10] } 32. b6 { [%clk 0:00:39] } axb6 { [%clk 0:00:09] } 33. axb6 { [%clk 0:00:39] } Qxb6 { [%clk 0:00:10] } 34. Qa2 { [%clk 0:00:38] } Rxg2+ { [%clk 0:00:10] } 35. Kf1 { [%clk 0:00:35] } Rg1+ { [%clk 0:00:08] } 36. Ke2 { [%clk 0:00:34] } Kc7 { [%clk 0:00:02] } 37. Bd2 { [%clk 0:00:30] } 1-0
 
 [Event "Rated Bullet game"]
-[Site "https://lichess.org/nvdyeyrS"]
-[Date "2018.11.30"]
-[Round "-"]
-[White "darksovereign"]
-[Black "ForkTown"]
-[Result "0-1"]
-[UTCDate "2018.11.30"]
-[UTCTime "23:00:07"]
-[WhiteElo "1417"]
-[BlackElo "1574"]
-[WhiteRatingDiff "-6"]
-[BlackRatingDiff "+6"]
-[ECO "B30"]
-[Opening "Sicilian Defense: Old Sicilian"]
-[TimeControl "120+1"]
-[Termination "Normal"]
-
-1. e4 { [%clk 0:02:00] } c5 { [%clk 0:02:00] } 2. Nf3 { [%clk 0:02:00] } Nc6 { [%clk 0:02:01] } 3. Bc4 { [%clk 0:01:59] } Na5 { [%clk 0:01:59] } 4. Na3 { [%clk 0:01:49] } Nxc4 { [%clk 0:01:58] } 5. Nxc4 { [%clk 0:01:50] } g6 { [%clk 0:01:58] } 6. d4 { [%clk 0:01:49] } cxd4 { [%clk 0:01:55] } 7. Nxd4 { [%clk 0:01:50] } Bg7 { [%clk 0:01:55] } 8. c3 { [%clk 0:01:50] } Nf6 { [%clk 0:01:55] } 9. Qf3 { [%clk 0:01:48] } O-O { [%clk 0:01:54] } 10. O-O { [%clk 0:01:48] } d5 { [%clk 0:01:53] } 11. exd5 { [%clk 0:01:39] } Nxd5 { [%clk 0:01:54] } 12. Re1 { [%clk 0:01:18] } a6 { [%clk 0:01:53] } 13. a4 { [%clk 0:01:15] } Bf5 { [%clk 0:01:33] } 14. Nxf5 { [%clk 0:01:00] } gxf5 { [%clk 0:01:32] } 15. Qxf5 { [%clk 0:00:56] } Nxc3 { [%clk 0:01:32] } 16. bxc3 { [%clk 0:00:54] } Bxc3 { [%clk 0:01:33] } 17. Rf1 { [%clk 0:00:44] } Bxa1 { [%clk 0:01:33] } 18. Nb2 { [%clk 0:00:28] } Qd4 { [%clk 0:01:29] } 19. Qb1 { [%clk 0:00:22] } Bxb2 { [%clk 0:01:16] } 20. Bxb2 { [%clk 0:00:22] } Qxa4 { [%clk 0:01:16] } 21. Qd3 { [%clk 0:00:15] } f6 { [%clk 0:01:12] } 22. Re1 { [%clk 0:00:13] } Rf7 { [%clk 0:01:12] } 23. h3 { [%clk 0:00:10] } Qc6 { [%clk 0:01:01] } 24. Qg3+ { [%clk 0:00:09] } Kf8 { [%clk 0:01:00] } 25. Qh4 { [%clk 0:00:03] } Rg7 { [%clk 0:00:59] } 26. Qh6 { [%clk 0:00:03] } Qxg2# { [%clk 0:00:56] } 0-1
-
-[Event "Rated Bullet game"]
 [Site "https://lichess.org/gEUsj40L"]
 [Date "2018.11.30"]
 [Round "-"]
