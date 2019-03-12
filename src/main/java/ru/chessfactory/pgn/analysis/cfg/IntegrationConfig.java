@@ -14,6 +14,9 @@ import org.springframework.integration.config.EnableIntegrationManagement;
 import org.springframework.integration.dsl.IntegrationFlow;
 import org.springframework.integration.dsl.IntegrationFlows;
 import org.springframework.integration.file.FileReadingMessageSource;
+import org.springframework.integration.file.filters.AcceptOnceFileListFilter;
+import org.springframework.integration.file.filters.CompositeFileListFilter;
+import org.springframework.integration.file.filters.FileListFilter;
 import org.springframework.integration.file.filters.RegexPatternFileListFilter;
 import org.springframework.integration.scheduling.PollerMetadata;
 import org.springframework.messaging.Message;
@@ -26,8 +29,11 @@ import ru.chessfactory.pgn.analysis.core.pipeline.*;
 
 import java.io.File;
 import java.util.Collection;
+import java.util.List;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
+
+import static java.util.Arrays.asList;
 
 @EnableIntegration
 @Configuration
@@ -38,7 +44,7 @@ public class IntegrationConfig {
 
 
     @Bean(name = PGN_QUEUE_NAME)
-    public QueueChannel pgnQueue(@Value("${chessfactory.max-pgn-in-flight}") int queueLen) {
+    public QueueChannel pgnQueue(@Value("${chessfactory.file-read.max-pgn-in-flight}") int queueLen) {
         return new QueueChannel(queueLen);
     }
 
@@ -48,6 +54,7 @@ public class IntegrationConfig {
                                                   FileToPGNProducerAdapter producer) {
         //Read files from directory, split to PGN games and produce to pgnQueue
         return IntegrationFlows.from(directoryFileSource, s -> s.poller(filePollerMetadata()))
+                .log()
                 .handle(producer)
                 .get();
     }
@@ -57,8 +64,7 @@ public class IntegrationConfig {
                                               PGNToGameTransformator pgnParser,
                                               GameToAggregatesTransformer gameToAggregatesTransformer,
                                               JDBCBatchAggregateSaver dbSaver,
-                                              GameFilter gameFilter)
-    {
+                                              GameFilter gameFilter) {
         return
                 //Read from pgn queue
                 IntegrationFlows.from(PGN_QUEUE_NAME)
@@ -86,11 +92,12 @@ public class IntegrationConfig {
 
 
     @Bean
-    public FileReadingMessageSource readFilesMessageSource(@Value("${chessfactory.dir}") String rootDir,
-                                                           @Value("${chessfactory.files-regexp}") String files) {
+    public FileReadingMessageSource readFilesMessageSource(@Value("${chessfactory.file-read.dir}") String rootDir,
+                                                           @Value("${chessfactory.file-read.files-regexp}") String files) {
         FileReadingMessageSource source = new FileReadingMessageSource();
         source.setDirectory(new File(rootDir));
-        source.setFilter(new RegexPatternFileListFilter(files));
+        List<? extends FileListFilter<File>> filters = asList(new RegexPatternFileListFilter(files), new AcceptOnceFileListFilter<>());
+        source.setFilter(new CompositeFileListFilter<>(filters));
         return source;
     }
 
@@ -106,7 +113,7 @@ public class IntegrationConfig {
 
     @Bean
     public FileToPGNProducerAdapter pgnProducer(IntegrationGateway gateway,
-                                                @Value("${chessfactory.readlimit}") long readLimit) {
+                                                @Value("${chessfactory.file-read.readlimit}") long readLimit) {
         return new FileToPGNProducerAdapter(gateway, readLimit);
     }
 
@@ -122,13 +129,9 @@ public class IntegrationConfig {
     }
 
     @Bean
+    @ConfigurationProperties(prefix = "chessfactory.file-read.pool")
     public TaskExecutor fileReadThread() {
         ThreadPoolTaskExecutor pool = new ThreadPoolTaskExecutor();
-        pool.setCorePoolSize(1);
-        pool.setMaxPoolSize(1);
-        pool.setThreadGroupName("fileReadThread");
-        pool.setQueueCapacity(1);
-        //TODO: Проверить что реально работает.
         pool.setRejectedExecutionHandler(new ThreadPoolExecutor.DiscardPolicy());
         return pool;
     }
@@ -152,17 +155,17 @@ public class IntegrationConfig {
     public PollerMetadata filePollerMetadata() {
         PollerMetadata m = new PollerMetadata();
         m.setTaskExecutor(fileReadThread());
+        Trigger t = new PeriodicTrigger(5, TimeUnit.SECONDS);
+        m.setTrigger(t);
         return m;
     }
 
     @Bean
     public PollerMetadata pgnPollerMetadata() {
-        //TODO: Настроить реалистичную производительность тут. Тоетть Сделать триггер и кол-во на POLL ограничить.
         PollerMetadata m = new PollerMetadata();
         m.setTaskExecutor(pgnHandleThreadPool());
-        Trigger t = new PeriodicTrigger(100, TimeUnit.MILLISECONDS);
+        Trigger t = new PeriodicTrigger(1, TimeUnit.SECONDS);
         m.setTrigger(t);
-        m.setMaxMessagesPerPoll(10000L);
         return m;
     }
 

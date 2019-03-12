@@ -20,10 +20,11 @@ I scan lichess database and there is results:
    
 2. What if i interesting find games, where mate reaches by knight promotion, and winning side has less material?
 
-3. What the strongest knight fork? (by fork-ed material)  
-
+3. [What the strongest knight fork? (by fork-ed material)](etc/results/fork-material.md))  
+   ![](etc/img/knight-fork.png)
+   
 4. Top games by average ranged pieces(B,R,Q) capture distance:
-
+    ![](etc/img/ranged-capture-distance.png)
 5. Take look for most valuable piece
     
    (Yes, need filtering games by hand, to avoid giveaway games like: https://lichess.org/IltUctI4 look on c7 pawn, future mvp queen :)) 
@@ -32,6 +33,8 @@ I scan lichess database and there is results:
    Nonsense :)
 
 7. Find position, when 8 pieces stay on one board-column:
+    ![](etc/img/one-column-pieces.png)
+    
 
 8. Mate by en-passant move: 
 

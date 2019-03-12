@@ -2,20 +2,23 @@ server:
   port: 38763
 
 chessfactory:
-  dir: /media/mark/DATAPART1/lichess12/
-  files-regexp: .*.pgn.bz2
-  readlimit: -1
-  max-pgn-in-flight: 50000
+  file-read:
+    dir: /media/mark/DATAPART1/lichess12/
+    files-regexp: .*.pgn.bz2
+    readlimit: -1
+    max-pgn-in-flight: 50000
+    pool:
+      threadNamePrefix: file-reader-thread
+      queueCapacity: 0
+      maxPoolSize: 4
   db-writer:
     batch-size: 10000
     pool:
-      corePoolSize: 1
-      maxPoolSize: 1
+      maxPoolSize: 4
       threadNamePrefix: db-writer-thread
   agg-calc:
     pool:
-      corePoolSize: 8
-      maxPoolSize: 8
+      maxPoolSize: 16
       queueCapacity: 0
       threadNamePrefix: agg-calc-thread
 
