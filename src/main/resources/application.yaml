@@ -6,13 +6,14 @@ chessfactory:
     dir: /media/mark/DATAPART1/lichess12/
     files-regexp: .*.pgn.bz2
     readlimit: -1
-    max-pgn-in-flight: 50000
+    max-pgn-in-flight: 60000
     pool:
       threadNamePrefix: file-reader-thread
       queueCapacity: 0
       maxPoolSize: 4
   db-writer:
-    batch-size: 10000
+    table: game_aggregates
+    batch-size: 15000
     pool:
       maxPoolSize: 4
       threadNamePrefix: db-writer-thread
