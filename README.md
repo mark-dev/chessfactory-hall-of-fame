@@ -19,29 +19,37 @@ I scan lichess database(602 million games, at march 2019) and there is results:
 
 1. [Longest uncrossed knight path in real games](/etc/results/knight-path.md)
 
-  ![](etc/img/knight-path.png)
-  
-   [read more about this problem(wikipedia)](https://en.wikipedia.org/wiki/Longest_uncrossed_knight%27s_path):       
+    ![](etc/img/knight-path.png)
     
+    [read more about this problem(wikipedia)](https://en.wikipedia.org/wiki/Longest_uncrossed_knight%27s_path)
+       
 2. [Games, where mate reaches by piece promotion, and winning side has less material](/etc/results/mate-by-pieces.md)
+   
    ![](etc/img/knight-promo-mate.png)
+   
    [game from picture](https://lichess.org/oKgxoBoi)
    
-3. [What the strongest knight fork? (by fork-ed material)](etc/results/fork-material.md))  
+3. [What the strongest knight fork? (by fork-ed material)](etc/results/fork-material.md)
+  
    ![](etc/img/knight-fork.png)
    
 4. [Top games by average ranged pieces(B,R,Q) capture distance](etc/results/ranged-capture-distance.md):
+    
     ![](etc/img/ranged-capture-distance.png)
    
 5. [Positions, where side can do a lot of captures?](etc/results/capture-sharpness.md)
+
    ![](etc/img/capture-sharpness.png)
+   
    [Game from picture](https://lichess.org/shIhqTdO#68)
     
 6. [Positions where 8 pieces stay on one board-column](etc/results/8-pieces-one-column.md)
+
     ![](etc/img/one-column-pieces.png)
     
 7. [Mate after en passant move](etc/results/ep-mate.md) 
+
     ![](etc/img/ep-mate.png)
-9. 
+    
    
 
