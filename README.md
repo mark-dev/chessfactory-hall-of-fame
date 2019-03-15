@@ -18,9 +18,10 @@ Used tools:
 I scan lichess database(602 million games, at march 2019) and there is results:
 
 1. [Longest uncrossed knight path in real games](/etc/results/knight-path.md)
+
   ![](etc/img/knight-path.png)
   
-    [read more about this problem(wikipedia)](https://en.wikipedia.org/wiki/Longest_uncrossed_knight%27s_path):       
+   [read more about this problem(wikipedia)](https://en.wikipedia.org/wiki/Longest_uncrossed_knight%27s_path):       
     
 2. [Games, where mate reaches by piece promotion, and winning side has less material](/etc/results/mate-by-pieces.md)
    ![](etc/img/knight-promo-mate.png)
