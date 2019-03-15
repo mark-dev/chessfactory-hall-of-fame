@@ -1,4 +1,6 @@
-### Mate by knight promotion, ordered by loosing side material advantage
+### Mate by knight promotion
+
+_tip: results ordered by losed side material advantage_
 
 ```sql
 select url,materialFromMatedSideView,gameType, blackElo,whiteElo
@@ -38,7 +40,7 @@ LIMIT 25;
 | 25 | https://lichess.org/o1SvmrtW | 625                       | 4        | 1897     | 1778     | 
 
 
-#### By bishop promotion
+### By bishop promotion
 
 | #  | url                          | materialFromMatedSideView | gameType | blackElo | whiteElo | 
 |----|------------------------------|---------------------------|----------|----------|----------| 
@@ -69,7 +71,7 @@ LIMIT 25;
 | 25 | https://lichess.org/tluSckUe | 75                        | 2        | 1865     | 1761     | 
 
 
-##### by rook promotion
+### by rook promotion
 
 | #  | url                          | materialFromMatedSideView | gameType | blackElo | whiteElo | 
 |----|------------------------------|---------------------------|----------|----------|----------| 

@@ -11,62 +11,60 @@ from game_aggregates
 WHERE
       avgRating > 2000 and
       allPiecesInColumnPly != 0
-ORDER BY allPiecesInColMaterialValue ASC ,avgRating DESC
+ORDER BY allPiecesInColMaterialValue DESC ,avgRating DESC
 limit 25;
 ```
 
-
-|    |                                 |          |          |                      |                      |                             | 
+| #  | directLinkMove                  | blackElo | whiteElo | allPiecesInColumnPly | allPiecesInColumnCol | allPiecesInColMaterialValue | 
 |----|---------------------------------|----------|----------|----------------------|----------------------|-----------------------------| 
-| # | directLinkMove                  | blackElo | whiteElo | allPiecesInColumnPly | allPiecesInColumnCol | allPiecesInColMaterialValue | 
-| 1  | https://lichess.org/xUppz0KK#28 | 2543     | 1823     | 28                   | 2                    | 1650                        | 
-| 2  | https://lichess.org/X1KMEFPp#16 | 2140     | 2203     | 16                   | 2                    | 1650                        | 
-| 3  | https://lichess.org/OSmxH35X#44 | 2151     | 2168     | 44                   | 5                    | 1650                        | 
-| 4  | https://lichess.org/k3ruskPU#16 | 2437     | 1810     | 16                   | 2                    | 1650                        | 
-| 5  | https://lichess.org/fPWChGit#16 | 2054     | 2089     | 16                   | 2                    | 1650                        | 
-| 6  | https://lichess.org/nTIFEMiw#41 | 1984     | 2089     | 41                   | 5                    | 1650                        | 
-| 7  | https://lichess.org/T0wUYHme#14 | 2483     | 2556     | 14                   | 2                    | 1675                        | 
-| 8  | https://lichess.org/sLdephol#25 | 2142     | 2514     | 25                   | 2                    | 1675                        | 
-| 9  | https://lichess.org/QHr8Jj7K#24 | 2297     | 2264     | 24                   | 2                    | 1675                        | 
-| 10 | https://lichess.org/T5TragJj#18 | 2221     | 2327     | 18                   | 2                    | 1675                        | 
-| 11 | https://lichess.org/aJZRFe0b#21 | 2148     | 2344     | 21                   | 2                    | 1675                        | 
-| 12 | https://lichess.org/fMifhWyL#17 | 2188     | 2279     | 17                   | 2                    | 1675                        | 
-| 13 | https://lichess.org/kxIpBfUX#18 | 2173     | 2209     | 18                   | 2                    | 1675                        | 
-| 14 | https://lichess.org/nDPPrlim#14 | 2105     | 2229     | 14                   | 2                    | 1675                        | 
-| 15 | https://lichess.org/F8ofGem4#16 | 2107     | 2187     | 16                   | 2                    | 1675                        | 
-| 16 | https://lichess.org/NVhets2p#17 | 2125     | 2114     | 17                   | 2                    | 1675                        | 
-| 17 | https://lichess.org/6w4Xh1ZA#45 | 2153     | 2079     | 45                   | 2                    | 1675                        | 
-| 18 | https://lichess.org/GjEMdW3g#17 | 2209     | 2003     | 17                   | 2                    | 1675                        | 
-| 19 | https://lichess.org/shXQMSuH#21 | 2170     | 2029     | 21                   | 2                    | 1675                        | 
-| 20 | https://lichess.org/HrjYa2Pm#21 | 2074     | 2109     | 21                   | 2                    | 1675                        | 
-| 21 | https://lichess.org/oYFZdtmo#16 | 2161     | 2021     | 16                   | 2                    | 1675                        | 
-| 22 | https://lichess.org/GLevmvD1#16 | 2069     | 2110     | 16                   | 2                    | 1675                        | 
-| 23 | https://lichess.org/PzKuameP#17 | 2073     | 2086     | 17                   | 2                    | 1675                        | 
-| 24 | https://lichess.org/HqbzHqbb#18 | 1984     | 2156     | 18                   | 2                    | 1675                        | 
-| 25 | https://lichess.org/4H2Ygvvq#17 | 2091     | 2044     | 17                   | 2                    | 1675                        | 
+| 1  | https://lichess.org/JLF5LkY4#61 | 2071     | 2110     | 61                   | 6                    | 5250                        | 
+| 2  | https://lichess.org/zryQUEDZ#68 | 2087     | 2413     | 68                   | 6                    | 5200                        | 
+| 3  | https://lichess.org/Lfe6oWqE#62 | 2168     | 2182     | 62                   | 5                    | 5200                        | 
+| 4  | https://lichess.org/zmRT0Kyh#68 | 2050     | 2017     | 68                   | 6                    | 5200                        | 
+| 5  | https://lichess.org/Wj1hmjzE#70 | 2073     | 1961     | 70                   | 6                    | 5200                        | 
+| 6  | https://lichess.org/8aFhdNPU#72 | 2207     | 2175     | 72                   | 6                    | 5050                        | 
+| 7  | https://lichess.org/0stP0VkO#61 | 2412     | 2781     | 61                   | 6                    | 5025                        | 
+| 8  | https://lichess.org/yNDZpaQq#68 | 2317     | 2278     | 68                   | 6                    | 5025                        | 
+| 9  | https://lichess.org/uROfAU49#48 | 2335     | 2239     | 48                   | 6                    | 5025                        | 
+| 10 | https://lichess.org/kE6tU2gw#58 | 2247     | 2301     | 58                   | 6                    | 5025                        | 
+| 11 | https://lichess.org/o2dx8imm#83 | 2096     | 2204     | 83                   | 6                    | 5025                        | 
+| 12 | https://lichess.org/z7RjS9mn#70 | 2223     | 2075     | 70                   | 6                    | 5025                        | 
+| 13 | https://lichess.org/IhkRI2bw#44 | 2180     | 2097     | 44                   | 6                    | 5025                        | 
+| 14 | https://lichess.org/idMPcSM5#55 | 2000     | 2246     | 55                   | 6                    | 5025                        | 
+| 15 | https://lichess.org/lNn9rhAv#59 | 1997     | 2229     | 59                   | 6                    | 5025                        | 
+| 16 | https://lichess.org/auvKYBbE#58 | 2097     | 2129     | 58                   | 6                    | 5025                        | 
+| 17 | https://lichess.org/nQMuWVI9#74 | 2213     | 2007     | 74                   | 6                    | 5025                        | 
+| 18 | https://lichess.org/TELsFPKF#46 | 2176     | 2041     | 46                   | 6                    | 5025                        | 
+| 19 | https://lichess.org/rwJCC1dv#61 | 2100     | 2077     | 61                   | 6                    | 5025                        | 
+| 20 | https://lichess.org/Gf61ftJc#73 | 2139     | 2018     | 73                   | 6                    | 5025                        | 
+| 21 | https://lichess.org/68v9s4RO#41 | 1717     | 2407     | 41                   | 6                    | 5025                        | 
+| 22 | https://lichess.org/3pnsd7Ps#58 | 2056     | 2056     | 58                   | 6                    | 5025                        | 
+| 23 | https://lichess.org/eZJQ07jG#64 | 2034     | 2067     | 64                   | 6                    | 5025                        | 
+| 24 | https://lichess.org/ZJujiUhl#70 | 2037     | 2055     | 70                   | 6                    | 5025                        | 
+| 25 | https://lichess.org/1MrkzvEh#62 | 1975     | 2098     | 62                   | 6                    | 5025                        | 
+                      | 
 
 
 ### Per column statistic (0=a,7=h)
 ```sql
 select
        allPiecesInColumnCol,
-       avg(allPiecesInColMaterialValue),
-       min(allPiecesInColMaterialValue),
-       max(allPiecesInColMaterialValue)
+       round(avg(allPiecesInColMaterialValue)) as avgMaterial,
+       min(allPiecesInColMaterialValue) as minMaterial,
+       max(allPiecesInColMaterialValue) as maxMaterial
 from game_aggregates
 WHERE
       allPiecesInColumnPly != 0
 GROUP BY allPiecesInColumnCol;
 ```
 
-|   |                      |                                  |                                  |                                  | 
-|---|----------------------|----------------------------------|----------------------------------|----------------------------------| 
-| # | allPiecesInColumnCol | avg(allPiecesInColMaterialValue) | min(allPiecesInColMaterialValue) | max(allPiecesInColMaterialValue) | 
-| 1 | 0                    | 3022.7669710202463               | 2000                             | 4800                             | 
-| 2 | 1                    | 3350.2613636363635               | 1850                             | 5025                             | 
-| 3 | 2                    | 2436.7429993777223               | 1450                             | 5200                             | 
-| 4 | 3                    | 3237.294551232058                | 1700                             | 5200                             | 
-| 5 | 4                    | 3445.354748397554                | 1675                             | 5200                             | 
-| 6 | 5                    | 2668.6636928118073               | 1450                             | 5200                             | 
-| 7 | 6                    | 3618.841545313163                | 1850                             | 5425                             | 
-| 8 | 7                    | 3504.546920348275                | 2025                             | 5225                             | 
+| # | allPiecesInColumnCol | avgMaterial | minMaterial | maxMaterial | 
+|---|----------------------|-------------|-------------|-------------| 
+| 1 | 0                    | 3023        | 2000        | 4800        | 
+| 2 | 1                    | 3350        | 1850        | 5025        | 
+| 3 | 2                    | 2437        | 1450        | 5200        | 
+| 4 | 3                    | 3237        | 1700        | 5200        | 
+| 5 | 4                    | 3445        | 1675        | 5200        | 
+| 6 | 5                    | 2669        | 1450        | 5200        | 
+| 7 | 6                    | 3619        | 1850        | 5425        | 
+| 8 | 7                    | 3505        | 2025        | 5225        | 

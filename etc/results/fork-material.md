@@ -1,114 +1,119 @@
+### Strongest knight forks
+
 ```sql
 select (url || '#' || toString(maxForkMaterialAmountPly)) as directLinkMove,
-                maxForkMaterialAmount,
-                blackElo,
-                whiteElo
+       maxForkMaterialAmount,
+       blackElo,
+       whiteElo,
+       maxForkMaterialAmountPieces
 from game_aggregates
-WHERE blackElo > 2000 and whiteElo > 2000
+WHERE not has(maxForkMaterialAmountPieces,cast('N' as FixedString(1)))
 order by maxForkMaterialAmount DESC
 limit 100;
 ```
 
-┌─directLinkMove───────────────────┬─maxForkMaterialAmount─┬─blackElo─┬─whiteElo─┬─maxForkMaterialAmountPieces───┐
-│ https://lichess.org/D9UDBXE9#60  │                  3525 │     1779 │     1585 │ ['R','K','R','B','Q','N','P'] │
-│ https://lichess.org/SnpzaXEw#55  │                  3525 │     1875 │     1898 │ ['N','P','Q','B','K','R','R'] │
-│ https://lichess.org/9g9gNGeV#62  │                  3525 │     1870 │     1857 │ ['R','R','Q','K','P','N','B'] │
-│ https://lichess.org/OINuA3xS#56  │                  3525 │     1861 │     1885 │ ['R','K','B','N','P','R','Q'] │
-│ https://lichess.org/eZ8Dn2Nz#35  │                  3425 │     1715 │     1713 │ ['N','B','Q','K','R','R']     │
-│ https://lichess.org/fsbzqMKX#46  │                  3425 │     1836 │     1824 │ ['R','R','N','K','Q','B']     │
-│ https://lichess.org/vFUw03ZK#51  │                  3425 │     1401 │     1401 │ ['B','N','Q','K','R','R']     │
-│ https://lichess.org/pDYjUxVU#40  │                  3425 │     1912 │     2051 │ ['R','R','Q','K','N','B']     │
-│ https://lichess.org/xMjLZc6n#38  │                  3425 │     1098 │     1165 │ ['R','K','R','B','Q','N']     │
-│ https://lichess.org/Lkjjvywf#38  │                  3425 │     1698 │     1797 │ ['R','R','Q','K','N','B']     │
-│ https://lichess.org/Oh3FDJAb#66  │                  3425 │     1859 │     1696 │ ['K','R','Q','R','N','B']     │
-│ https://lichess.org/wMTfwVAU#55  │                  3425 │     1628 │     1505 │ ['B','N','Q','K','R','R']     │
-│ https://lichess.org/mJ1c1NtW#43  │                  3425 │     1540 │     1939 │ ['B','N','Q','K','R','R']     │
-│ https://lichess.org/MsrUxqsX#40  │                  3425 │     1143 │     1161 │ ['K','R','Q','B','N','R']     │
-│ https://lichess.org/DfPvI6Vc#50  │                  3425 │     1409 │     1404 │ ['R','R','Q','K','B','N']     │
-│ https://lichess.org/4tuJdXPU#56  │                  3425 │     2209 │     2189 │ ['R','R','Q','B','N','K']     │
-│ https://lichess.org/gvuoSFOo#57  │                  3425 │     1573 │     1554 │ ['R','N','Q','B','R','K']     │
-│ https://lichess.org/1KuVfes7#50  │                  3425 │     1290 │     1434 │ ['R','R','K','Q','B','N']     │
-│ https://lichess.org/u4G17uPm#55  │                  3425 │     1904 │     2031 │ ['B','N','Q','R','R','K']     │
-│ https://lichess.org/yCpmsc7Z#54  │                  3425 │     2016 │     1990 │ ['R','K','Q','N','R','B']     │
-│ https://lichess.org/smUpdmbG#57  │                  3400 │     1846 │     1628 │ ['N','N','Q','K','R','R']     │
-│ https://lichess.org/ojvPtPeg#43  │                  3400 │     1820 │     1614 │ ['N','R','N','R','Q','K']     │
-│ https://lichess.org/EpCNcQB0#47  │                  3400 │     1568 │     1594 │ ['N','N','Q','K','R','R']     │
-│ https://lichess.org/1fqgm4Uy#29  │                  3325 │     1416 │     1426 │ ['N','N','B','P','K','Q','R'] │
-│ https://lichess.org/pmCzBvRT#26  │                  3325 │     1620 │     1672 │ ['Q','R','P','K','B','N','N'] │
-│ https://lichess.org/jM22s2CR#42  │                  3325 │     1520 │     1368 │ ['R','K','N','P','B','Q','N'] │
-│ https://lichess.org/AS3n51E0#36  │                  3325 │     1394 │     1405 │ ['R','Q','P','K','B','N','N'] │
-│ https://lichess.org/3kyHJUPC#31  │                  3325 │     1736 │     1726 │ ['N','B','N','Q','P','R','K'] │
-│ https://lichess.org/UMlFLmmS#44  │                  3300 │     1638 │     1661 │ ['R','R','K','Q','P','N','P'] │
-│ https://lichess.org/LvV0xcq6#50  │                  3300 │     1581 │     1488 │ ['R','K','N','P','R','Q','P'] │
-│ https://lichess.org/v7Hkfgv7#79  │                  3300 │     1654 │     1540 │ ['P','P','N','Q','K','R','R'] │
-│ https://lichess.org/v6rI1v4X#66  │                  3300 │     1504 │     1539 │ ['R','K','R','P','Q','P','N'] │
-│ https://lichess.org/JJYP5qHX#50  │                  3300 │     1269 │     1303 │ ['K','R','P','P','R','N','Q'] │
-│ https://lichess.org/Rf2MYCis#230 │                  3300 │     1609 │     1451 │ ['N','Q','N','Q','Q']         │
-│ https://lichess.org/F7BseTe3#51  │                  3300 │     1520 │     1598 │ ['N','P','P','Q','K','R','R'] │
-│ https://lichess.org/BMZ6OpKS#65  │                  3300 │     1414 │     1381 │ ['P','Q','N','R','P','R','K'] │
-│ https://lichess.org/361jGBll#58  │                  3300 │     1436 │     1497 │ ['R','R','Q','K','P','P','N'] │
-│ https://lichess.org/jXQ3RbzY#42  │                  3300 │     1858 │     1857 │ ['R','K','N','R','P','P','Q'] │
-│ https://lichess.org/RCXyKUiI#71  │                  3300 │     1414 │     1397 │ ['P','N','Q','R','P','R','K'] │
-│ https://lichess.org/WfV4RyhK#69  │                  3300 │     1995 │     1983 │ ['P','P','N','Q','K','R','R'] │
-│ https://lichess.org/zDlHO7nV#73  │                  3300 │     1623 │     1845 │ ['P','N','P','Q','K','R','R'] │
-│ https://lichess.org/MhQvb9XS#46  │                  3300 │     1684 │     1769 │ ['R','K','Q','P','P','N','R'] │
-│ https://lichess.org/6ZukjcGG#64  │                  3300 │     1986 │     2060 │ ['R','R','Q','K','P','N','P'] │
-│ https://lichess.org/wYs5XLuF#54  │                  3300 │     1966 │     2120 │ ['R','R','Q','K','N','P','P'] │
-│ https://lichess.org/Yyu56kzR#59  │                  3300 │     1622 │     2051 │ ['R','P','P','Q','K','R','N'] │
-│ https://lichess.org/oxniYkw2#61  │                  3300 │     1309 │     1404 │ ['N','P','R','Q','P','K','R'] │
-│ https://lichess.org/Y8ir3gU5#54  │                  3300 │     1958 │     1948 │ ['R','R','Q','K','P','P','N'] │
-│ https://lichess.org/U8vYnjSe#50  │                  3300 │     2413 │     2357 │ ['R','K','Q','R','P','N','P'] │
-│ https://lichess.org/LmzlTZx7#38  │                  3300 │     1743 │     1859 │ ['R','R','Q','K','P','N','P'] │
-│ https://lichess.org/BCOMSkxt#54  │                  3300 │     2073 │     2146 │ ['R','R','Q','K','P','P','N'] │
-│ https://lichess.org/kaOdAK5a#54  │                  3300 │     1915 │     1900 │ ['R','R','Q','K','N','P','P'] │
-│ https://lichess.org/F8w4hpVU#53  │                  3300 │     2050 │     1979 │ ['P','N','Q','R','P','R','K'] │
-│ https://lichess.org/OD8EcQDc#68  │                  3300 │     1841 │     1846 │ ['R','K','P','P','N','R','Q'] │
-│ https://lichess.org/uZaidubE#32  │                  3225 │     1186 │     1800 │ ['K','N','B','R','N','Q']     │
-│ https://lichess.org/WpVm549Q#67  │                  3225 │     1861 │     1847 │ ['N','Q','B','N','R','K']     │
-│ https://lichess.org/HZjSIiNn#44  │                  3225 │     1498 │     1500 │ ['K','R','Q','B','N','N']     │
-│ https://lichess.org/37sKk6Tk#53  │                  3225 │     2228 │     2059 │ ['Q','N','N','B','R','K']     │
-│ https://lichess.org/Je2w9juR#38  │                  3225 │     1728 │     1674 │ ['R','K','N','Q','N','B']     │
-│ https://lichess.org/AO3hkIAM#47  │                  3225 │     1368 │     1368 │ ['Q','N','N','B','K','R']     │
-│ https://lichess.org/UDjJSo48#69  │                  3225 │     1717 │     1537 │ ['Q','N','N','B','R','K']     │
-│ https://lichess.org/ghUvgcxd#40  │                  3225 │     2193 │     1686 │ ['R','K','Q','N','B','N']     │
-│ https://lichess.org/qwtyjH91#40  │                  3225 │     1883 │     2180 │ ['R','K','B','N','Q','N']     │
-│ https://lichess.org/E3m4Pvn1#40  │                  3225 │     1732 │     1520 │ ['R','K','Q','N','N','B']     │
-│ https://lichess.org/odELHch4#42  │                  3225 │     1821 │     1918 │ ['R','N','Q','K','N','B']     │
-│ https://lichess.org/YgDluG8F#42  │                  3225 │     1779 │     1282 │ ['R','K','Q','N','N','B']     │
-│ https://lichess.org/2c01rdAG#41  │                  3225 │     1488 │     1479 │ ['N','N','B','K','Q','R']     │
-│ https://lichess.org/sbErvX4l#43  │                  3225 │     2060 │     2046 │ ['Q','N','B','N','R','K']     │
-│ https://lichess.org/7lFyKrcZ#27  │                  3225 │     1523 │     1481 │ ['N','N','Q','B','K','R']     │
-│ https://lichess.org/vVhPM0te#51  │                  3225 │     1241 │     1472 │ ['N','N','B','K','Q','R']     │
-│ https://lichess.org/030PrK5M#36  │                  3225 │     1358 │     1329 │ ['R','K','N','N','B','Q']     │
-│ https://lichess.org/8AhvioCY#44  │                  3200 │     1207 │     1387 │ ['R','K','N','P','Q','R']     │
-│ https://lichess.org/E1fCq2Yb#34  │                  3200 │     1592 │     1729 │ ['R','R','K','P','Q','N']     │
-│ https://lichess.org/D6mHw0Zn#52  │                  3200 │     1275 │     1307 │ ['K','R','P','Q','N','R']     │
-│ https://lichess.org/vC3FQwWK#47  │                  3200 │     1920 │     1820 │ ['N','Q','R','P','R','K']     │
-│ https://lichess.org/r1m1ZUaZ#51  │                  3200 │     1779 │     1603 │ ['N','Q','P','K','R','R']     │
-│ https://lichess.org/pwzeSSmv#44  │                  3200 │     1503 │     1412 │ ['R','K','Q','R','P','N']     │
-│ https://lichess.org/gzyjt2VP#68  │                  3200 │     2062 │     2075 │ ['R','R','Q','K','P','N']     │
-│ https://lichess.org/nl1ExZ2w#44  │                  3200 │     1962 │     1958 │ ['R','R','P','K','N','Q']     │
-│ https://lichess.org/9ILU2Eds#43  │                  3200 │     1171 │     1357 │ ['N','R','Q','P','R','K']     │
-│ https://lichess.org/xTuxqCEj#58  │                  3200 │     1515 │     1420 │ ['R','K','Q','P','N','R']     │
-│ https://lichess.org/vOnZQiJQ#52  │                  3200 │     1254 │     1246 │ ['R','K','P','R','Q','N']     │
-│ https://lichess.org/RY0Qfjsy#37  │                  3200 │     1787 │     1763 │ ['P','N','Q','K','R','R']     │
-│ https://lichess.org/7V8QoSLo#35  │                  3200 │     1261 │     1298 │ ['N','P','Q','K','R','R']     │
-│ https://lichess.org/d3cNzYMP#41  │                  3200 │     1300 │     1261 │ ['P','N','Q','K','R','R']     │
-│ https://lichess.org/ETy6hxFE#39  │                  3200 │     1692 │     1645 │ ['R','Q','N','P','R','K']     │
-│ https://lichess.org/pbUdq2Vk#37  │                  3200 │     2043 │     2154 │ ['N','P','Q','K','R','R']     │
-│ https://lichess.org/oSNPUeCC#65  │                  3200 │     1457 │     1529 │ ['N','P','K','Q','R','R']     │
-│ https://lichess.org/8HFotOMw#35  │                  3200 │     1626 │     1653 │ ['N','P','Q','K','R','R']     │
-│ https://lichess.org/pXExoO6f#56  │                  3200 │     1464 │     1546 │ ['R','K','R','Q','P','N']     │
-│ https://lichess.org/Ud3NO4EL#42  │                  3200 │     1829 │     1917 │ ['R','R','Q','K','P','N']     │
-│ https://lichess.org/WBVPgFI4#52  │                  3200 │     1949 │     2008 │ ['R','R','K','P','N','Q']     │
-│ https://lichess.org/sPaLvm7u#35  │                  3200 │     1966 │     2125 │ ['N','P','Q','K','R','R']     │
-│ https://lichess.org/toRXPXxQ#42  │                  3200 │     1557 │     1624 │ ['R','K','Q','N','R','P']     │
-│ https://lichess.org/XmEbeCbi#42  │                  3200 │     1224 │     1228 │ ['R','R','P','K','Q','N']     │
-│ https://lichess.org/daXWZu9e#42  │                  3200 │     1947 │     1900 │ ['R','R','Q','K','N','P']     │
-│ https://lichess.org/0UKj4Azd#67  │                  3200 │     1735 │     1779 │ ['N','P','R','Q','R','K']     │
-│ https://lichess.org/gY2xqMlk#33  │                  3200 │     1408 │     1371 │ ['N','Q','P','K','R','R']     │
-│ https://lichess.org/ydc52Dtg#56  │                  3200 │     1571 │     1555 │ ['R','R','Q','K','N','P']     │
-│ https://lichess.org/cz7uJQ9F#58  │                  3200 │     1677 │     1645 │ ['R','Q','K','P','R','N']     │
-│ https://lichess.org/JGaSdbI2#42  │                  3200 │     1546 │     1949 │ ['R','R','P','K','Q','N']     │
-└──────────────────────────────────┴───────────────────────┴──────────┴──────────┴───────────────────────────────┘
+| #   | directLinkMove                  | maxForkMaterialAmount | blackElo | whiteElo | maxForkMaterialAmountPieces | 
+|-----|---------------------------------|-----------------------|----------|----------|-----------------------------| 
+| 1   | https://lichess.org/1XSp4Qkp#48 | 3400                  | 1646     | 1634     | {R,K,Q,P,P,Q}               | 
+| 2   | https://lichess.org/p6d0q5ab#52 | 3325                  | 1443     | 1640     | {R,K,Q,R,P,P,B}             | 
+| 3   | https://lichess.org/N3lH6V1X#56 | 3325                  | 1831     | 1861     | {R,R,Q,K,P,B,P}             | 
+| 4   | https://lichess.org/AMr0pk2p#59 | 3325                  | 1789     | 1794     | {P,B,P,Q,K,R,R}             | 
+| 5   | https://lichess.org/OC8S90fk#59 | 3325                  | 2050     | 1885     | {P,P,B,R,K,Q,R}             | 
+| 6   | https://lichess.org/Ar4obkyk#48 | 3325                  | 1840     | 1864     | {R,R,Q,K,P,P,B}             | 
+| 7   | https://lichess.org/LnCno4t7#56 | 3325                  | 1998     | 2034     | {R,R,Q,K,P,P,B}             | 
+| 8   | https://lichess.org/bbl2Ba7H#56 | 3325                  | 1627     | 1519     | {Q,R,B,K,P,R,P}             | 
+| 9   | https://lichess.org/Dr1RKHRM#35 | 3325                  | 1656     | 869      | {P,Q,B,P,K,R,R}             | 
+| 10  | https://lichess.org/LaBqTLoO#61 | 3325                  | 1659     | 1927     | {R,P,P,Q,B,R,K}             | 
+| 11  | https://lichess.org/MlyLyK0Y#79 | 3325                  | 1919     | 1866     | {P,R,P,B,K,Q,R}             | 
+| 12  | https://lichess.org/52T14igj#51 | 3325                  | 1430     | 1427     | {P,P,B,R,K,Q,R}             | 
+| 13  | https://lichess.org/AqqvcX2g#54 | 3325                  | 2415     | 2292     | {K,R,B,P,P,Q,R}             | 
+| 14  | https://lichess.org/2bcu40hv#44 | 3325                  | 1481     | 1408     | {R,R,B,K,P,Q,P}             | 
+| 15  | https://lichess.org/iH77GDpA#61 | 3325                  | 966      | 996      | {P,R,P,B,K,R,Q}             | 
+| 16  | https://lichess.org/VfDdWAYH#44 | 3325                  | 2235     | 2241     | {K,R,Q,P,R,B,P}             | 
+| 17  | https://lichess.org/siqh4ACk#61 | 3325                  | 1511     | 1645     | {P,P,Q,K,B,R,R}             | 
+| 18  | https://lichess.org/XKj4TbRi#54 | 3325                  | 2040     | 1765     | {Q,R,B,K,P,R,P}             | 
+| 19  | https://lichess.org/7wAqzlpa#45 | 3325                  | 1837     | 1826     | {R,B,P,Q,P,R,K}             | 
+| 20  | https://lichess.org/fl6iMokz#58 | 3325                  | 1800     | 1747     | {R,R,Q,K,P,P,B}             | 
+| 21  | https://lichess.org/pcrYxK0C#69 | 3325                  | 1831     | 1827     | {P,B,Q,P,R,K,R}             | 
+| 22  | https://lichess.org/v0uDFQWc#47 | 3325                  | 1362     | 1405     | {P,Q,B,P,K,R,R}             | 
+| 23  | https://lichess.org/B7nLiECl#60 | 3325                  | 1563     | 1412     | {B,R,Q,K,P,P,R}             | 
+| 24  | https://lichess.org/61f2q19r#57 | 3325                  | 1639     | 1852     | {B,P,Q,P,K,R,R}             | 
+| 25  | https://lichess.org/91B0RMuF#45 | 3325                  | 1821     | 1908     | {B,P,P,R,K,Q,R}             | 
+| 26  | https://lichess.org/H90epx5l#56 | 3325                  | 2112     | 1971     | {R,K,Q,B,P,R,P}             | 
+| 27  | https://lichess.org/5Shir2ns#40 | 3325                  | 2165     | 2090     | {R,R,Q,K,P,P,B}             | 
+| 28  | https://lichess.org/srGP705f#60 | 3325                  | 1889     | 1888     | {R,R,Q,K,B,P,P}             | 
+| 29  | https://lichess.org/avLBwdV1#44 | 3325                  | 2066     | 2014     | {R,K,Q,B,P,P,R}             | 
+| 30  | https://lichess.org/y6AGU2TW#75 | 3300                  | 2094     | 2009     | {Q,Q,P,K,R}                 | 
+| 31  | https://lichess.org/jlZwUudQ#86 | 3300                  | 1333     | 1387     | {R,K,P,Q,Q}                 | 
+| 32  | https://lichess.org/XUNOtNoA#44 | 3225                  | 1123     | 1160     | {R,R,P,K,B,Q}               | 
+| 33  | https://lichess.org/VRpcpPqx#57 | 3225                  | 1695     | 1524     | {Q,P,K,B,R,R}               | 
+| 34  | https://lichess.org/RFVUikFe#62 | 3225                  | 1737     | 1717     | {K,R,Q,P,B,R}               | 
+| 35  | https://lichess.org/fWjlavxT#37 | 3225                  | 1286     | 1640     | {Q,B,R,P,R,K}               | 
+| 36  | https://lichess.org/zEWuD2Tb#46 | 3225                  | 1453     | 1440     | {R,K,Q,P,R,B}               | 
+| 37  | https://lichess.org/BKLyOaQH#47 | 3225                  | 1819     | 1761     | {R,P,Q,B,R,K}               | 
+| 38  | https://lichess.org/ejtK3i8r#43 | 3225                  | 1306     | 1209     | {B,P,Q,K,R,R}               | 
+| 39  | https://lichess.org/QDkcG1PP#47 | 3225                  | 1707     | 1693     | {R,B,P,Q,R,K}               | 
+| 40  | https://lichess.org/sI3uC3Us#67 | 3225                  | 1922     | 1735     | {R,Q,P,B,K,R}               | 
+| 41  | https://lichess.org/DioOlCv3#40 | 3225                  | 2093     | 2024     | {R,R,Q,K,P,B}               | 
+| 42  | https://lichess.org/IOlgeGaQ#50 | 3225                  | 2244     | 2224     | {R,K,Q,P,R,B}               | 
+| 43  | https://lichess.org/JDc3wf5b#34 | 3225                  | 1053     | 1110     | {R,R,K,B,Q,P}               | 
+| 44  | https://lichess.org/m8fWJ6Us#35 | 3225                  | 1460     | 1348     | {B,Q,R,P,R,K}               | 
+| 45  | https://lichess.org/XZHfwDCj#53 | 3225                  | 1716     | 1812     | {P,Q,B,K,R,R}               | 
+| 46  | https://lichess.org/PNHeG5Tx#68 | 3225                  | 1824     | 1754     | {R,K,Q,R,P,B}               | 
+| 47  | https://lichess.org/07tcKBRC#72 | 3225                  | 1392     | 1364     | {K,R,R,Q,B,P}               | 
+| 48  | https://lichess.org/XVNtGwxQ#64 | 3225                  | 2128     | 2126     | {R,K,Q,P,B,R}               | 
+| 49  | https://lichess.org/XAuEkwHQ#40 | 3225                  | 1419     | 1456     | {R,K,Q,P,R,B}               | 
+| 50  | https://lichess.org/cMd8tVFZ#44 | 3225                  | 1557     | 1555     | {R,Q,K,R,P,B}               | 
+| 51  | https://lichess.org/1GlJBhlw#56 | 3225                  | 1500     | 1555     | {R,R,Q,K,B,P}               | 
+| 52  | https://lichess.org/4uMnAyDq#54 | 3225                  | 1562     | 1576     | {R,R,B,K,P,Q}               | 
+| 53  | https://lichess.org/8ufl4Sok#42 | 3225                  | 1629     | 1683     | {R,R,Q,K,B,P}               | 
+| 54  | https://lichess.org/cEx4i3wQ#44 | 3225                  | 1687     | 1664     | {R,K,Q,B,P,R}               | 
+| 55  | https://lichess.org/sEOr6GHh#35 | 3225                  | 1952     | 1864     | {R,B,Q,P,R,K}               | 
+| 56  | https://lichess.org/kJYxbt4r#51 | 3225                  | 1751     | 1782     | {B,R,Q,P,R,K}               | 
+| 57  | https://lichess.org/vIJWJDxr#58 | 3225                  | 1760     | 1775     | {R,R,B,K,P,Q}               | 
+| 58  | https://lichess.org/TUOk29Qe#59 | 3225                  | 1780     | 1733     | {Q,R,P,B,K,R}               | 
+| 59  | https://lichess.org/ixvs8UYh#44 | 3225                  | 1771     | 1686     | {Q,R,R,K,P,B}               | 
+| 60  | https://lichess.org/5Yao6q9U#51 | 3225                  | 1521     | 1539     | {B,P,Q,K,R,R}               | 
+| 61  | https://lichess.org/WD8NvQf6#54 | 3225                  | 1648     | 1937     | {R,K,P,B,Q,R}               | 
+| 62  | https://lichess.org/Nlv3FbFF#41 | 3225                  | 1735     | 1769     | {B,R,Q,P,R,K}               | 
+| 63  | https://lichess.org/pUeTiuGW#56 | 3225                  | 1136     | 1104     | {R,K,P,Q,R,B}               | 
+| 64  | https://lichess.org/DEtbzIWG#42 | 3225                  | 1507     | 1112     | {R,R,Q,K,P,B}               | 
+| 65  | https://lichess.org/riLUhvef#49 | 3225                  | 1663     | 1363     | {R,P,Q,B,R,K}               | 
+| 66  | https://lichess.org/7mzltxP5#44 | 3225                  | 1736     | 1729     | {K,R,B,P,Q,R}               | 
+| 67  | https://lichess.org/Dn9w84SU#66 | 3225                  | 1468     | 1624     | {R,R,K,B,P,Q}               | 
+| 68  | https://lichess.org/eoXwMV7C#49 | 3225                  | 1820     | 1523     | {P,R,B,Q,K,R}               | 
+| 69  | https://lichess.org/V523rkih#57 | 3225                  | 1291     | 1097     | {R,P,K,Q,R,B}               | 
+| 70  | https://lichess.org/zggerXiw#45 | 3225                  | 1876     | 1884     | {R,B,Q,P,R,K}               | 
+| 71  | https://lichess.org/t8XMFtdl#37 | 3225                  | 1239     | 1240     | {Q,P,K,B,R,R}               | 
+| 72  | https://lichess.org/ennSTC1H#45 | 3225                  | 1236     | 1273     | {R,P,B,Q,K,R}               | 
+| 73  | https://lichess.org/UuUwrIg6#68 | 3225                  | 1088     | 1119     | {R,R,K,P,Q,B}               | 
+| 74  | https://lichess.org/8rAr9TM6#66 | 3225                  | 1975     | 2166     | {Q,K,R,B,R,P}               | 
+| 75  | https://lichess.org/4lsHycsA#48 | 3225                  | 1272     | 1229     | {R,K,R,P,Q,B}               | 
+| 76  | https://lichess.org/lzIi3wsp#45 | 3225                  | 1782     | 1944     | {B,R,Q,P,R,K}               | 
+| 77  | https://lichess.org/4C70hVKu#40 | 3225                  | 1615     | 1678     | {R,K,P,Q,R,B}               | 
+| 78  | https://lichess.org/jxSNzibj#61 | 3225                  | 1923     | 1693     | {Q,P,B,R,R,K}               | 
+| 79  | https://lichess.org/K5XHTuoO#43 | 3225                  | 1528     | 1672     | {R,B,P,Q,R,K}               | 
+| 80  | https://lichess.org/pHYwFIWi#48 | 3225                  | 1954     | 1932     | {R,K,Q,P,R,B}               | 
+| 81  | https://lichess.org/uxuL2gTm#48 | 3225                  | 2220     | 2236     | {R,K,P,R,Q,B}               | 
+| 82  | https://lichess.org/qKYKd4ZK#54 | 3225                  | 1995     | 2013     | {R,R,K,B,P,Q}               | 
+| 83  | https://lichess.org/FGMeuJne#39 | 3225                  | 1584     | 1584     | {R,B,Q,P,R,K}               | 
+| 84  | https://lichess.org/rpXAcISX#45 | 3225                  | 1664     | 1676     | {P,B,Q,K,R,R}               | 
+| 85  | https://lichess.org/NQGDWiQt#46 | 3225                  | 1693     | 1662     | {R,K,Q,B,P,R}               | 
+| 86  | https://lichess.org/kZjc5ckb#55 | 3225                  | 1282     | 1297     | {Q,R,P,B,R,K}               | 
+| 87  | https://lichess.org/n6nEJ3SJ#64 | 3225                  | 1665     | 1498     | {R,K,Q,R,B,P}               | 
+| 88  | https://lichess.org/BIvHw1vF#45 | 3225                  | 1238     | 1189     | {B,Q,P,R,K,R}               | 
+| 89  | https://lichess.org/LIhm4fGM#42 | 3225                  | 2190     | 2314     | {R,Q,P,R,K,B}               | 
+| 90  | https://lichess.org/rNPs5RNT#48 | 3225                  | 2261     | 2219     | {R,K,B,P,R,Q}               | 
+| 91  | https://lichess.org/z7u6cozg#68 | 3225                  | 1829     | 1827     | {R,K,B,P,Q,R}               | 
+| 92  | https://lichess.org/TLvXXRqZ#47 | 3225                  | 1963     | 1751     | {B,Q,R,P,R,K}               | 
+| 93  | https://lichess.org/43w2s2Za#59 | 3225                  | 1974     | 1843     | {R,P,Q,B,R,K}               | 
+| 94  | https://lichess.org/eUt7D1HK#55 | 3225                  | 1911     | 1701     | {B,P,Q,R,R,K}               | 
+| 95  | https://lichess.org/zPEJRMUf#70 | 3225                  | 2013     | 2299     | {R,Q,K,P,B,R}               | 
+| 96  | https://lichess.org/cHgkxTfy#30 | 3225                  | 1652     | 1635     | {R,K,Q,P,R,B}               | 
+| 97  | https://lichess.org/QURfrSxo#35 | 3225                  | 1905     | 1983     | {R,B,Q,P,R,K}               | 
+| 98  | https://lichess.org/zB6bal2U#48 | 3225                  | 1556     | 1540     | {R,R,Q,K,P,B}               | 
+| 99  | https://lichess.org/zS0fz0mH#58 | 3225                  | 1646     | 1644     | {R,R,K,B,P,Q}               | 
+| 100 | https://lichess.org/EQrKe216#57 | 3225                  | 1963     | 1839     | {B,R,Q,P,R,K}               | 
+
+
 
