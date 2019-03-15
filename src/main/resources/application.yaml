@@ -8,20 +8,20 @@ chessfactory:
     readlimit: -1
     max-pgn-in-flight: 60000
     pool:
-      threadNamePrefix: file-reader-thread
-      queueCapacity: 0
-      maxPoolSize: 4
+      thread-name-prefix: file-reader-thread
+      queue-capacity: 0
+      max-pool-size: 4
   db-writer:
     table: game_aggregates
     batch-size: 15000
     pool:
-      maxPoolSize: 4
-      threadNamePrefix: db-writer-thread
+      max-pool-size: 4
+      thread-name-prefix: db-write-thread
   agg-calc:
     pool:
-      maxPoolSize: 16
-      queueCapacity: 0
-      threadNamePrefix: agg-calc-thread
+      max-pool-size: 16
+      queue-capacity: 0
+      thread-name-prefix: agg-calc-thread
 
 management:
   endpoints:
