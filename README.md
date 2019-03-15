@@ -15,39 +15,44 @@ Used tools:
 * [Clickhouse](https://clickhouse.yandex/)
 
     
-I scan lichess database(602 million games, at march 2019) and there is results:
+I scan lichess database(there was 602 million at march 2019) and there is results:
 
-1. [Longest uncrossed knight path in real games](/etc/results/knight-path.md)
+1. [Games where defeated side has piece advantage](etc/results/got-mate-with-extra-material.md)  
+
+   ![](etc/img/got-mate-with-extra-material.png)   
+
+2. [Longest uncrossed knight path in real games](/etc/results/knight-path.md)
+
+    [Read more about this problem(wikipedia)](https://en.wikipedia.org/wiki/Longest_uncrossed_knight%27s_path)
 
     ![](etc/img/knight-path.png)
     
-    [read more about this problem(wikipedia)](https://en.wikipedia.org/wiki/Longest_uncrossed_knight%27s_path)
-       
-2. [Games, where mate reaches by piece promotion, and winning side has less material](/etc/results/mate-by-pieces.md)
+
+3. [Games, where mate reaches by piece promotion, and winning side has less material](/etc/results/mate-by-pieces.md)
    
    ![](etc/img/knight-promo-mate.png)
    
    [game from picture](https://lichess.org/oKgxoBoi)
    
-3. [What the strongest knight fork? (by fork-ed material)](etc/results/fork-material.md)
+4. [What the strongest knight fork? (by fork-ed material)](etc/results/fork-material.md)
   
    ![](etc/img/knight-fork.png)
    
-4. [Top games by average ranged pieces(B,R,Q) capture distance](etc/results/ranged-capture-distance.md):
+5. [Top games by average ranged pieces(B,R,Q) capture distance](etc/results/ranged-capture-distance.md):
     
     ![](etc/img/ranged-capture-distance.png)
    
-5. [Positions, where side can do a lot of captures?](etc/results/capture-sharpness.md)
+6. [Positions, where side can do a lot of captures?](etc/results/capture-sharpness.md)
 
    ![](etc/img/capture-sharpness.png)
    
    [Game from picture](https://lichess.org/shIhqTdO#68)
     
-6. [Positions where 8 pieces stay on one board-column](etc/results/8-pieces-one-column.md)
+7. [Positions where 8 pieces stay on one board-column](etc/results/8-pieces-one-column.md)
 
     ![](etc/img/one-column-pieces.png)
     
-7. [Mate after en passant move](etc/results/ep-mate.md) 
+8. [Mate after en passant move](etc/results/ep-mate.md) 
 
     ![](etc/img/ep-mate.png)
     
