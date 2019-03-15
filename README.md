@@ -1,9 +1,9 @@
 ## Chessfactory: hall of fame
 ![](etc/img/cf.png)
 
-Originally, [Chessfactory](https://github.com/mark-dev/chessfactory) is my study web chess project, inspired by [lichess](https://lichess.org).
+Idea of this project is explore lichess database: find interesting games and to form my own 'Top N' rating by various criterias (see below).
 
-Idea of this project is find interesting chess games and to form my own 'Top N' rating by various criterias (see below).
+Originally, [Chessfactory](https://github.com/mark-dev/chessfactory) is my study web chess project, inspired by [lichess](https://lichess.org).
 
 Project has same name prefix, because it also study and inspired by lichess :)
 
@@ -11,11 +11,11 @@ Used tools:
 
 * [lichess database](https://database.lichess.org/) 
 * My fork of [chesspresso java lib](https://github.com/mark-dev/chesspresso)
-* [Spring](https://spring.io/)
+* [Spring](https://spring.io/) with [Spring integration](https://spring.io/projects/spring-integration)
 * [Clickhouse](https://clickhouse.yandex/)
 
     
-I scan lichess database(there was 602 million at march 2019) and there is results:
+I scan lichess database(there was 602M games at march 2019) and here is my results:
 
 1. [Games where defeated side has piece advantage](etc/results/got-mate-with-extra-material.md)  
 
