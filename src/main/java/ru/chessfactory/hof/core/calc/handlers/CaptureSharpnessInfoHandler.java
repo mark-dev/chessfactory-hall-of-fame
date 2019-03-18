@@ -2,8 +2,8 @@ package ru.chessfactory.hof.core.calc.handlers;
 
 import chesspresso.move.Move;
 import chesspresso.position.Position;
-import ru.chessfactory.hof.core.calc.AggregateResultField;
-import ru.chessfactory.hof.core.calc.IMoveHandler;
+import ru.chessfactory.hof.commons.AggregateResultField;
+import ru.chessfactory.hof.commons.IMoveHandler;
 
 public class CaptureSharpnessInfoHandler implements IMoveHandler {
 

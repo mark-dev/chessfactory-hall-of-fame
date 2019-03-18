@@ -3,9 +3,9 @@ package ru.chessfactory.hof.core.util;
 import chesspresso.game.Game;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
-import ru.chessfactory.hof.core.GameAggregates;
-import ru.chessfactory.hof.core.calc.AggregateResultField;
-import ru.chessfactory.hof.core.calc.IMoveHandler;
+import ru.chessfactory.hof.commons.GameAggregates;
+import ru.chessfactory.hof.commons.AggregateResultField;
+import ru.chessfactory.hof.commons.IMoveHandler;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
@@ -28,7 +28,7 @@ public class PGNPlayback {
         //Prepare handlers
         handlers.forEach(h -> h.prepare(game));
 
-        game.gotoStart(); //required, by default last move set on board.
+        game.gotoStart(); //this is required, by default last move set on board.
 
         //Iterate though moves, notify handlers.
         //TODO: Exception handling?

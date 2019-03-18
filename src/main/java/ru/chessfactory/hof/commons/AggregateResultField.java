@@ -1,4 +1,4 @@
-package ru.chessfactory.hof.core.calc;
+package ru.chessfactory.hof.commons;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

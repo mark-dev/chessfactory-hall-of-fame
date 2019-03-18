@@ -10,9 +10,9 @@ import org.springframework.integration.transformer.AbstractTransformer;
 import org.springframework.messaging.Message;
 import org.springframework.messaging.MessageHeaders;
 import org.springframework.util.StopWatch;
-import ru.chessfactory.hof.core.GameAggregates;
-import ru.chessfactory.hof.core.GameTypes;
-import ru.chessfactory.hof.core.calc.IMoveHandler;
+import ru.chessfactory.hof.commons.GameAggregates;
+import ru.chessfactory.hof.commons.GameTypes;
+import ru.chessfactory.hof.commons.IMoveHandler;
 import ru.chessfactory.hof.core.util.PGNPlayback;
 
 import java.sql.Time;

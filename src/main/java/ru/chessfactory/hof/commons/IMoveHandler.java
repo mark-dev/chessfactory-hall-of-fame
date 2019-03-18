@@ -1,4 +1,4 @@
-package ru.chessfactory.hof.core.calc;
+package ru.chessfactory.hof.commons;
 
 import chesspresso.game.Game;
 import chesspresso.move.Move;

@@ -1,7 +1,7 @@
 truncate table game_aggregates;
 
 
---Создание таблицы
+--Create table
 
 drop table game_aggregates;
 create table if not exists game_aggregates
@@ -51,103 +51,114 @@ SET allow_experimental_data_skipping_indices = 1;
 ALTER TABLE game_aggregates
   ADD INDEX maxForkMaterialAmountIndex(maxForkMaterialAmount) TYPE minmax GRANULARITY 3;
 
---Общее кол-во
-select count()
-from game_aggregates;
---Фигуры в одну вертикаль стоят
+--Total count
+select count(*) from game_aggregates;
+
+-- One column pieces
 select url || '#' || toString(allPiecesInColumnPly) as directLinkMove,
        blackElo,
        whiteElo,
        allPiecesInColumnPly,
-       allPiecesInColumnCol
+       allPiecesInColumnCol,
+       allPiecesInColMaterialValue
 from game_aggregates
-WHERE allPiecesInColumnPly != 0
-  and allPiecesInColumnCol = 7
-ORDER BY avgRating DESC
+WHERE
+      avgRating > 2000 and
+      allPiecesInColumnPly != 0
+ORDER BY allPiecesInColMaterialValue DESC ,avgRating DESC
 limit 25;
 
---Когда заматовали, а у проигравшей стороны много лишнего материала
---TODO: Включить условие поиска по заматовавшей фигуре
-select materialFromMatedSideView,url,gameType,blackElo,whiteElo
-from game_aggregates
-WHERE avgRating > 1800
-      --and gameType = 3
-order by materialFromMatedSideView desc
-limit 10;
 
---Взятие на проходе
+select
+       allPiecesInColumnCol,
+       round(avg(allPiecesInColMaterialValue)) as avgMaterial,
+       min(allPiecesInColMaterialValue) as minMaterial,
+       max(allPiecesInColMaterialValue) as maxMaterial
+from game_aggregates
+WHERE
+     -- avgRating > 2000 and
+      allPiecesInColumnPly != 0
+GROUP BY allPiecesInColumnCol;
+
+
+-- Mates sorted by defeat side piece advantage
+select url || '#' || toString(plies) as mateUrl,materialFromMatedSideView,gameType,blackElo,whiteElo
+from game_aggregates
+where avgRating > 1800
+order by materialFromMatedSideView desc
+limit 25;
+
+
+select url || '#' || toString(plies) as mateUrl,materialFromMatedSideView,gameType, blackElo,whiteElo
+from game_aggregates
+--where avgRating > 1800
+order by materialFromMatedSideView desc
+LIMIT 100;
+
+--en passant moves
 select url,blackElo,whiteElo,epMoves
 from game_aggregates
-WHERE blackElo > 2000
-  and whiteElo > 2000
+--WHERE avgRating > 1800
 order by epMoves DESC
-limit 5;
+limit 25;
 
---Длинные взятия дальнобойными фигурами
+--Ranged capture distance
 select url,avgRangedCaptureDistance,rangedCaptureMoves,blackElo,whiteElo
 from game_aggregates
-WHERE rangedCaptureMoves > 5
-  and blackElo > 2000
-  and whiteElo > 2000
-order by rangedCaptureMoves desc,avgRangedCaptureDistance desc
-limit 20;
+WHERE avgRating > 1800 and rangedCaptureMoves > 20
+order by avgRangedCaptureDistance desc
+limit 25;
 
--- Мат в следствии взятия на проходе
--- TODO Использовать заматовавшую фигуру, чтобы отсечь скрытые шахи
-select url, blackElo,whiteElo
+-- ep mates
+select url || '#' || toString(plies) as mateUrl, blackElo,whiteElo
 from game_aggregates
 where epMate = 1
   and avgRating > 2000
 order by materialFromMatedSideView desc
-limit 5;
+limit 25;
 
--- Фигура с наибольшим кол-вом фрагов
-select url,mvpFrags,mvpType,mvpInitialPosition
+-- mvp pieces
+select mvpType,max(mvpFrags) as maxMvpFrags
 from game_aggregates
-WHERE avgRating > 2000
-  and gameType > 3
-order by mvpFrags desc
-limit 10;
+group by mvpType
 
--- Вилка с наибольшим значением материала
+-- Fork by fork amount
 select (url || '#' || toString(maxForkMaterialAmountPly)) as directLinkMove,
        maxForkMaterialAmount,
        blackElo,
        whiteElo,
        maxForkMaterialAmountPieces
 from game_aggregates
-WHERE avgRating > 2000 and not has(maxForkMaterialAmountPieces,cast('N' as FixedString(1)))
+WHERE not has(maxForkMaterialAmountPieces,cast('N' as FixedString(1)))
 order by maxForkMaterialAmount DESC
 limit 100;
 
---Путь коня без повторений
+--Longest uncrossed knight path
 select url,knightLongestPath,longestKnightInitialPosition, knightLongestPathDetails
 from game_aggregates
 order by knightLongestPath DESC
-limit 5;
+limit 25;
 
---Позиции в которых много взятий
+--Capture sharpness
 select maxCaptureSharpness,
        maxCaptureSharpnessPly,
        url || '#' || toString(maxCaptureSharpnessPly)
 from game_aggregates
 ORDER BY maxCaptureSharpness DESC
-limit 5;
+limit 25;
 
---Мат путем превращения в коня(или др. фигуру)
-select url,materialFromMatedSideView,gameType, blackElo,whiteElo
+--pawn mates
+select  url || '#' || toString(plies) as mateUrl,materialFromMatedSideView,gameType, blackElo,whiteElo
 from game_aggregates
-where mateByPromotion = 1
-  and matePiece == 'N'
-  and avgRating > 2000
+where matePiece == 'P'
 order by materialFromMatedSideView desc
-LIMIT 5;
+LIMIT 25;
 
+
+
+
+--count statistics per filename
 select fileName,count()
 from game_aggregates
 group by fileName
 order by fileName
-
-select *
-from game_aggregates
-where url = 'https://lichess.org/vmMB0SGL'

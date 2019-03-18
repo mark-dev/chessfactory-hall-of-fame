@@ -1,4 +1,4 @@
-package ru.chessfactory.hof.core.calc;
+package ru.chessfactory.hof.core.calc.handlers.dto;
 
 import chesspresso.Chess;
 import lombok.AllArgsConstructor;

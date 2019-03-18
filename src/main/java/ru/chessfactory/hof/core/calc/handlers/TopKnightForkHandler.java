@@ -5,9 +5,9 @@ import chesspresso.move.Move;
 import chesspresso.position.Position;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
-import ru.chessfactory.hof.core.calc.AggregateResultField;
-import ru.chessfactory.hof.core.calc.IMoveHandler;
-import ru.chessfactory.hof.core.util.ChessUtils;
+import ru.chessfactory.hof.commons.AggregateResultField;
+import ru.chessfactory.hof.commons.IMoveHandler;
+import ru.chessfactory.hof.commons.ChessUtils;
 
 import java.util.ArrayList;
 import java.util.Collections;

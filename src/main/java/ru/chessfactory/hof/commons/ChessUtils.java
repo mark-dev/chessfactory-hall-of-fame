@@ -1,4 +1,4 @@
-package ru.chessfactory.hof.core.util;
+package ru.chessfactory.hof.commons;
 
 import chesspresso.Chess;
 

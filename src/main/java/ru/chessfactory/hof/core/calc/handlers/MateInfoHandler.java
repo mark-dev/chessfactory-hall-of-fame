@@ -4,8 +4,8 @@ import chesspresso.Chess;
 import chesspresso.move.Move;
 import chesspresso.position.Position;
 import lombok.SneakyThrows;
-import ru.chessfactory.hof.core.calc.AggregateResultField;
-import ru.chessfactory.hof.core.calc.IMoveHandler;
+import ru.chessfactory.hof.commons.AggregateResultField;
+import ru.chessfactory.hof.commons.IMoveHandler;
 
 public class MateInfoHandler implements IMoveHandler {
     @AggregateResultField

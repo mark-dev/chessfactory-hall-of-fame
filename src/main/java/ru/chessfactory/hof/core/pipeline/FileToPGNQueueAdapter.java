@@ -11,6 +11,9 @@ import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.IOException;
 
+/**
+ * Read received file and produce games to pgnQueue
+ */
 @Slf4j
 public class FileToPGNQueueAdapter implements GenericHandler<File> {
 

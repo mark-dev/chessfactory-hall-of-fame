@@ -1,4 +1,4 @@
-### High rated games with '8 pieces in column' sorted by pieces material amount
+### Games sorted by capture sharpness (count of different capture moves)
 
 ```sql
 select maxCaptureSharpness,

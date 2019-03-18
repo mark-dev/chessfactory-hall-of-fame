@@ -10,5 +10,5 @@ import java.io.ByteArrayInputStream;
 @MessagingGateway
 public interface IntegrationGateway {
     @Gateway(requestChannel = IntegrationConfig.PGN_QUEUE_NAME)
-    void produce(Message<ByteArrayInputStream> bais);
+    void produce(Message<ByteArrayInputStream> pgn);
 }

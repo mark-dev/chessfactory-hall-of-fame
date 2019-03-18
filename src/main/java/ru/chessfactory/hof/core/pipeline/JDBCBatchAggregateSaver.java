@@ -12,7 +12,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.messaging.Message;
 import org.springframework.messaging.MessageHeaders;
 import org.springframework.util.StopWatch;
-import ru.chessfactory.hof.core.GameAggregates;
+import ru.chessfactory.hof.commons.GameAggregates;
 
 import javax.annotation.PostConstruct;
 import java.sql.DatabaseMetaData;

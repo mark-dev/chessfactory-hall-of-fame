@@ -3,9 +3,9 @@ package ru.chessfactory.hof.core.calc.handlers;
 import chesspresso.Chess;
 import chesspresso.move.Move;
 import chesspresso.position.Position;
-import ru.chessfactory.hof.core.calc.AggregateResultField;
-import ru.chessfactory.hof.core.calc.IMoveHandler;
-import ru.chessfactory.hof.core.util.ChessUtils;
+import ru.chessfactory.hof.commons.AggregateResultField;
+import ru.chessfactory.hof.commons.IMoveHandler;
+import ru.chessfactory.hof.commons.ChessUtils;
 
 public class PiecesInColumnInfoHandler implements IMoveHandler {
 

@@ -54,7 +54,7 @@ dependencies {
     implementation(group: 'org.slf4j', name: 'slf4j-api', version: '1.7.25')
     implementation(group: 'ch.qos.logback', name: 'logback-classic', version: '1.2.3')
     implementation(group: 'org.reflections', name: 'reflections', version: '0.9.11')
-    implementation files('libs/chesspresso-jtsay362-0.9.3-SNAPSHOT.jar') //TODO: upload to central
+    implementation files('libs/chesspresso-jtsay362-markdev-0.9.4-SNAPSHOT.jar') //TODO: upload to central
     implementation group: 'org.apache.commons', name: 'commons-compress', version: '1.10'
     
     

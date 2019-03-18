@@ -4,9 +4,9 @@ import chesspresso.Chess;
 import chesspresso.move.Move;
 import chesspresso.position.Position;
 import lombok.extern.slf4j.Slf4j;
-import ru.chessfactory.hof.core.calc.AggregateResultField;
-import ru.chessfactory.hof.core.calc.IMoveHandler;
-import ru.chessfactory.hof.core.calc.PieceInformation;
+import ru.chessfactory.hof.commons.AggregateResultField;
+import ru.chessfactory.hof.commons.IMoveHandler;
+import ru.chessfactory.hof.core.calc.handlers.dto.PieceInformation;
 
 import java.util.*;
 import java.util.stream.Collectors;
