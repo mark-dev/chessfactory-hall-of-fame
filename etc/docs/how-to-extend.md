@@ -10,7 +10,7 @@ After file processing finish, we can use SQL to ask clickhouse 'give me games wh
 
 1. Install clickhouse database and setup [schema](/etc/sql/schema.sql)
 2. Download some *.pgn.bz2 files from [lichess database](https://database.lichess.org/) 
-3. Configure the application (eg: change pgn files directory). [Configuration file](/src/main/resource/application.yaml)
+3. Configure the application (eg: change pgn files directory). [Configuration file](/src/main/resources/application.yaml)
 4. Run application
 
 ##### Your own handler:
