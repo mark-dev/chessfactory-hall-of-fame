@@ -61,7 +61,7 @@ public class PieceStatisticsHandler implements IMoveHandler {
             movingPiece.setFrags(movingPiece.getFrags() + 1);
         }
         if (m.isPromotion()) {
-            //Делаем из старой фигуры новую
+            //Change piece type due promotion
             movingPiece.setPiece(m.getPromo());
         }
 

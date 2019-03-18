@@ -27,7 +27,6 @@ I scan lichess database(there was 602M games at march 2019) and here is my resul
 
     ![](etc/img/knight-path.png)
     
-
 3. [List games, where mate reaches by piece promotion, and winning side has less material](/etc/docs/results/mate-by-pieces.md)
    
    ![](etc/img/knight-promo-mate.png)
@@ -56,5 +55,11 @@ I scan lichess database(there was 602M games at march 2019) and here is my resul
 
     ![](etc/img/ep-mate.png)
     
-   
+9. Has ideas?
+     
+    Your turn :) 
 
+    If you interested you can [read more about tecnhical aspects](etc/docs/how-to-extend.md) 
+    and implement your own chess research ideas.
+
+![](etc/img/bN.png) ![](etc/img/bN.png) ![](etc/img/bN.png) 
