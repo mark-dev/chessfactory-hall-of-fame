@@ -10,6 +10,7 @@ import ru.chessfactory.hof.core.util.BZipPNGReader;
 import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.IOException;
+import java.util.concurrent.atomic.AtomicLong;
 
 /**
  * Read received file and produce games to pgnQueue
@@ -18,8 +19,8 @@ import java.io.IOException;
 public class FileToPGNQueueAdapter implements GenericHandler<File> {
 
     private IntegrationGateway gateway;
-    private long readLimit;
-    private long readed = 0;
+    private final Long readLimit;
+    private AtomicLong readed = new AtomicLong();
 
     public FileToPGNQueueAdapter(IntegrationGateway gateway, long readLimit) {
         this.gateway = gateway;
@@ -28,13 +29,14 @@ public class FileToPGNQueueAdapter implements GenericHandler<File> {
 
     @Override
     public Object handle(File payload, MessageHeaders headers) {
-        if (readLimitNotReached()) {
+        if (readLimitNotReached()) { //do not open file, if limit already reached
             try (BZipPNGReader producer = BZipPNGReader.of(payload, readLimitForDelegate())) {
                 ByteArrayInputStream pgn = null;
-                while ((pgn = producer.readNextGame()) != null) {
+                //other thread can reach limit, stop processing if this occurs
+                while (readLimitNotReached() && (pgn = producer.readNextGame()) != null) {
                     GenericMessage<ByteArrayInputStream> msg = new GenericMessage<>(pgn, headers);
                     gateway.produce(msg);
-                    readed++;
+                    readed.incrementAndGet();
                 }
             } catch (IOException e) {
                 log.error("", e);
@@ -47,15 +49,20 @@ public class FileToPGNQueueAdapter implements GenericHandler<File> {
         if (readLimit < 0)
             return true;
         else
-            return readLimit > readed;
+            return readLimit > readed.get();
     }
 
     private long readLimitForDelegate() {
         if (readLimit < 0)
             return readLimit;
-        if (readLimit > readed) {
-            return readLimit - readed;
-        } else
-            return 0;
+        else {
+            synchronized (readLimit) {
+                long currentReadedCtx = readed.get();
+                if (readLimit > currentReadedCtx) {
+                    return readLimit - currentReadedCtx;
+                } else
+                    return 0;
+            }
+        }
     }
 }

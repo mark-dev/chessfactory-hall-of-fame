@@ -65,9 +65,11 @@ public class IntegrationConfig {
                 IntegrationFlows.from(directoryFileSource, s -> s.poller(scanDirPollerMetadata()))
                         //split to PGN games and produce to pgnQueue
                         .channel(MessageChannels.executor(fileReadThread()))
-                        .log()
+                        .log("file fetched from directory")
                         .handle(producer)
+                        .log("file readed fully(or readlimit)")
                         .handle(moveFileAfterProcessing)
+                        .log("file moved to done dir")
                         //print file info after finish
                         .log()
                         .get();
