@@ -1,7 +1,7 @@
 drop table game_aggregates;
 create table if not exists game_aggregates
 (
-  url                          String,
+  url                          String, --TODO: url datatype, compress
   insertTime                   DateTime DEFAULT now(),
   utc                          DateTime,
   fileName                     String,
