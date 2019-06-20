@@ -30,18 +30,23 @@ public class FileToPGNQueueAdapter implements GenericHandler<File> {
     @Override
     public Object handle(File payload, MessageHeaders headers) {
         if (readLimitNotReached()) { //do not open file, if limit already reached
-            try (BZipPNGReader producer = BZipPNGReader.of(payload, readLimitForDelegate())) {
+
+            try (BZipPNGReader producer = BZipPNGReader.of(payload, readLimit)) {
                 ByteArrayInputStream pgn = null;
-                //other thread can reach limit, stop processing if this occurs
+
+                //double check - other thread can reach limit.
+                //if this occurs - terminate loop
                 while (readLimitNotReached() && (pgn = producer.readNextGame()) != null) {
                     GenericMessage<ByteArrayInputStream> msg = new GenericMessage<>(pgn, headers);
                     gateway.produce(msg);
+
                     readed.incrementAndGet();
                 }
             } catch (IOException e) {
-                log.error("", e);
+                log.error("PGN Reader exception", e);
             }
         }
+
         return payload;
     }
 
@@ -50,19 +55,5 @@ public class FileToPGNQueueAdapter implements GenericHandler<File> {
             return true;
         else
             return readLimit > readed.get();
-    }
-
-    private long readLimitForDelegate() {
-        if (readLimit < 0)
-            return readLimit;
-        else {
-            synchronized (readLimit) {
-                long currentReadedCtx = readed.get();
-                if (readLimit > currentReadedCtx) {
-                    return readLimit - currentReadedCtx;
-                } else
-                    return 0;
-            }
-        }
     }
 }
