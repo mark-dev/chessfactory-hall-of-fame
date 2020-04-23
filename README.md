@@ -5,7 +5,7 @@ The purpose of this project is to explore the [lichess database](https://databas
 
 Originally, [Chessfactory](https://github.com/mark-dev/chessfactory) is my study web chess project, inspired by [lichess](https://lichess.org).
 
-This project has same name prefix, because it also study and inspired by lichess :)
+This project has same name prefix, because also study and inspired by lichess :)
 
 Used tools:
 
