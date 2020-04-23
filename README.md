@@ -1,7 +1,7 @@
 ## Chessfactory: hall of fame
 ![](etc/img/cf.png)
 
-The purpose of this project is to explore the [lichess database](https://database.lichess.org/)for interesting games and positions. As an example, I created my list of interesting parties by various criteria (see below).
+The purpose of this project is to explore the [lichess database](https://database.lichess.org/) for interesting games and positions. As an example, I created my list of interesting parties by various criteria (see below).
 
 Originally, [Chessfactory](https://github.com/mark-dev/chessfactory) is my study web chess project, inspired by [lichess](https://lichess.org).
 
